@@ -1,0 +1,18 @@
+{
+    "name": "leo/car-rent",
+    "autoload": {
+        "psr-4": {
+            "Backend\\CarRent\\": "backend/"
+        },
+      "files": [
+        "backend/function.php"
+      ]
+    },
+    "authors": [
+        {
+            "name": "Leo",
+            "email": "loe@gmail.com"
+        }
+    ],
+    "require": {}
+}
