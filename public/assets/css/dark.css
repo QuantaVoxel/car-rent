@@ -92,6 +92,7 @@ body .blog-one,
 .team-one__buttons,
 .testimonial-one__single,
 .booking-one__input-box input[type="text"],
+.booking-one__input-box input[type="password"],
 .booking-one__input-box input[type="email"],
 .booking-one__input-box .nice-select {
     border: 1px solid rgba(var(--gorent-white-rgb), .10);

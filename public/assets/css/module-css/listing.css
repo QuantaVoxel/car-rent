@@ -2065,6 +2065,7 @@
 }
 
 .listing-single__rent-car-date-time-box input[type="text"],
+.listing-single__rent-car-date-time-box input[type="password"],
 .listing-single__rent-car-date-time-box input[type="email"] {
     height: 50px;
     width: 60%;

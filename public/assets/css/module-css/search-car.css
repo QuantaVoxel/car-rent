@@ -177,6 +177,7 @@
 }
 
 .search-car__input-box input[type="text"],
+.search-car__input-box input[type="password"],
 .search-car__input-box input[type="email"] {
     height: 50px;
     width: 100%;

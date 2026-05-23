@@ -38,3 +38,35 @@ if (!function_exists('component')) {
         return ob_get_clean();
     }
 }
+
+if(!function_exists('auth')){
+    function auth(): \Backend\CarRent\Auth{
+        return \Backend\CarRent\Auth::getInstance();
+    }
+}
+
+if (!function_exists('set_flash')) {
+    function set_flash($type, $message)
+    {
+        $_SESSION['flash'][$type] = $message;
+    }
+}
+
+if (!function_exists('get_flash')) {
+    function get_flash($type)
+    {
+        if (isset($_SESSION['flash'][$type])) {
+            $message = $_SESSION['flash'][$type];
+            unset($_SESSION['flash'][$type]);
+            return $message;
+        }
+        return null;
+    }
+}
+
+if (!function_exists('has_flash')) {
+    function has_flash($type)
+    {
+        return isset($_SESSION['flash'][$type]);
+    }
+}

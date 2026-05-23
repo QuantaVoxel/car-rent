@@ -1972,6 +1972,7 @@ Product Description
 }
 
 .review-form-one__input-box input[type="text"],
+.review-form-one__input-box input[type="password"],
 .review-form-one__input-box input[type="email"] {
     height: 50px;
     width: 100%;
@@ -2457,6 +2458,7 @@ Product Description
 }
 
 .billing_input_box input[type="text"],
+.billing_input_box input[type="password"],
 .billing_input_box input[type="email"],
 .billing_input_box input[type="tel"] {
     height: 60px;
@@ -3113,6 +3115,7 @@ Product Description
 }
 
 .sign-up-one__form form input[type="text"],
+.sign-up-one__form form input[type="password"],
 .sign-up-one__form form input[type="email"] {
     position: relative;
     display: block;
@@ -3292,6 +3295,7 @@ Product Description
 }
 
 .login-one__form form input[type="text"],
+.login-one__form form input[type="password"],
 .login-one__form form input[type="email"] {
     position: relative;
     display: block;
@@ -3312,6 +3316,7 @@ Product Description
 }
 
 .login-one__form form input[type="text"]:focus,
+.login-one__form form input[type="password"]:focus,
 .login-one__form form input[type="email"]:focus {
     border-color: var(--gorent-base);
     background-color: var(--gorent-white);
@@ -3346,6 +3351,22 @@ Product Description
 }
 
 .login-one__form form input[type="email"]:-ms-input-placeholder {
+    color: var(--gorent-gray);
+}
+
+.login-one__form form input[type="password"]::-webkit-input-placeholder {
+    color: var(--gorent-gray);
+}
+
+.login-one__form form input[type="password"]:-moz-placeholder {
+    color: var(--gorent-gray);
+}
+
+.login-one__form form input[type="password"]::-moz-placeholder {
+    color: var(--gorent-gray);
+}
+
+.login-one__form form input[type="password"]:-ms-input-placeholder {
     color: var(--gorent-gray);
 }
 

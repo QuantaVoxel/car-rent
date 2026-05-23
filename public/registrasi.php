@@ -99,14 +99,8 @@ require_once __DIR__ . '/../backend/bootstrap.php';
         <div class="container">
             <div class="login-one__form">
                 <div class="inner-title text-center">
-                    <h2>Login</h2>
+                    <h2>Registrasi Akun</h2>
                 </div>
-
-                <?php if (has_flash('success')): ?>
-                    <div class="alert alert-success">
-                        <?= get_flash('success') ?>
-                    </div>
-                <?php endif; ?>
 
                 <?php if (has_flash('error')): ?>
                     <div class="alert alert-danger">
@@ -114,12 +108,28 @@ require_once __DIR__ . '/../backend/bootstrap.php';
                     </div>
                 <?php endif; ?>
 
-                <form id="login-one__form" name="Login-one_form" action="process/auth/login.php" method="post">
+                <form id="login-one__form" name="Login-one_form" action="process/auth/registrasi.php" method="post">
                     <div class="row">
                         <div class="col-xl-12">
                             <div class="form-group">
                                 <div class="input-box">
+                                    <input type="text" name="nama_lengkap" placeholder="Nama Lengkap..."
+                                           required="" value="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-12">
+                            <div class="form-group">
+                                <div class="input-box">
                                     <input type="email" name="email" id="formEmail" placeholder="Email..."
+                                           required="" value="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-12">
+                            <div class="form-group">
+                                <div class="input-box">
+                                    <input type="text" name="no_telepon" placeholder="Nomor Telepon..."
                                            required="" value="">
                                 </div>
                             </div>
@@ -134,14 +144,13 @@ require_once __DIR__ . '/../backend/bootstrap.php';
                         </div>
                         <div class="col-xl-12">
                             <div class="form-group">
-                                <button class="thm-btn" type="submit" data-loading-text="Please wait...">Login Here
+                                <button class="thm-btn" type="submit" data-loading-text="Please wait...">Registrasi Sekarang
                                     <span class="fas fa-arrow-right"></span>
                                 </button>
                             </div>
                         </div>
-
                         <div class="create-account text-center">
-                            <p>belum punya akun? <a href="registrasi.php">registrasi</a></p>
+                            <p>sudah punya akun? <a href="login.php">login</a></p>
                         </div>
                     </div>
                 </form>

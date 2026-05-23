@@ -101,14 +101,16 @@
                             <a href="#" class="mobile-nav__toggler"><i class="fa fa-bars"></i></a>
                             <?= layout('nav') ?>
                         </div>
-                        <div class="main-menu-three__search-cart-box">
-                            <div class="main-menu-three__cart-box">
-                                <a href="cart.html" class="main-menu-three__cart">
-                                    <span class="far fa-shopping-cart"></span>
-                                    <span class="main-menu-three__cart-count">02</span>
-                                </a>
+                        <?php if (auth()->check()) : ?>
+                            <div class="main-menu-three__search-cart-box">
+                                <div class="main-menu-three__cart-box">
+                                    <a href="cart.php" class="main-menu-three__cart">
+                                        <span class="far fa-shopping-cart"></span>
+                                        <span class="main-menu-three__cart-count">02</span>
+                                    </a>
+                                </div>
                             </div>
-                        </div>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>

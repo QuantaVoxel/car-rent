@@ -138,6 +138,7 @@
 }
 
 .booking-one__input-box input[type="text"],
+.booking-one__input-box input[type="password"],
 .booking-one__input-box input[type="email"] {
     height: 50px;
     width: 100%;

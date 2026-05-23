@@ -146,22 +146,6 @@
 </div>
 <!-- /.mobile-nav__wrapper -->
 
-<div class="search-popup">
-    <div class="search-popup__overlay search-toggler"></div>
-    <!-- /.search-popup__overlay -->
-    <div class="search-popup__content">
-        <form action="#">
-            <label for="search" class="sr-only">search here</label><!-- /.sr-only -->
-            <input type="text" id="search" placeholder="Search Here..."/>
-            <button type="submit" aria-label="search submit" class="thm-btn">
-                <i class="fas fa-search"></i>
-            </button>
-        </form>
-    </div>
-    <!-- /.search-popup__content -->
-</div>
-<!-- /.search-popup -->
-
 <a href="#" data-target="html" class="scroll-to-target scroll-to-top">
     <span class="scroll-to-top__wrapper"><span class="scroll-to-top__inner"></span></span>
     <span class="scroll-to-top__text"> Go Back Top</span>

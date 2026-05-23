@@ -4,6 +4,14 @@
 --  Revisi: Tanpa modul Driver. Admin yang mengelola & menyiapkan kendaraan.
 -- ============================================================
 
+DROP table IF EXISTS `pesanan`;
+DROP table IF EXISTS `pembayaran`;
+DROP table IF EXISTS `evaluasi_pesanan`;
+DROP table IF EXISTS `log_pesanan`;
+DROP table IF EXISTS `kendaraan`;
+DROP table IF EXISTS `tipe_kendaraan`;
+DROP table IF EXISTS `pengguna`;
+
 SET
 FOREIGN_KEY_CHECKS = 0;
 SET
@@ -19,26 +27,9 @@ CREATE TABLE pengguna
     nama_lengkap  VARCHAR(100) NOT NULL,
     email         VARCHAR(150) NOT NULL UNIQUE,
     no_telepon    VARCHAR(20)  NOT NULL UNIQUE,
-    password_hash VARCHAR(255) NOT NULL,
-    foto_profil   VARCHAR(255) NULL,
+    password VARCHAR(255) NOT NULL,
+    role ENUM('admin','pengguna') NOT NULL DEFAULT 'pengguna',
     status_akun   ENUM('aktif','nonaktif','suspend') NOT NULL DEFAULT 'aktif',
-    created_at    TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    updated_at    TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- ------------------------------------------------------------
--- 2. TABEL ADMIN
---    Admin mengelola kendaraan, memproses & mengantar pesanan
--- ------------------------------------------------------------
-CREATE TABLE admin
-(
-    id_admin      INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    nama_lengkap  VARCHAR(100) NOT NULL,
-    email         VARCHAR(150) NOT NULL UNIQUE,
-    no_telepon    VARCHAR(20)  NOT NULL UNIQUE,
-    password_hash VARCHAR(255) NOT NULL,
-    role          ENUM('superadmin','admin') NOT NULL DEFAULT 'admin',
-    is_active     TINYINT(1)          NOT NULL DEFAULT 1,
     created_at    TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at    TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -75,7 +66,7 @@ CREATE TABLE kendaraan
     foto_kendaraan VARCHAR(255) NULL,
     harga_perhari DECIMAL(10, 2) NOT NULL,
     is_manual BOOLEAN NOT NULL DEFAULT FALSE,
-    jenis_bahan_bakar ENUM('bensin','diesel','listrik') NOT NULL DEFAULT,
+    jenis_bahan_bakar ENUM('bensin','diesel','listrik') NOT NULL DEFAULT 'bensin',
     kapasitas_penumpang INT UNSIGNED NOT NULL DEFAULT 4,
     status         ENUM('tersedia','dipakai','perawatan','nonaktif') NOT NULL DEFAULT 'tersedia',
     created_at     TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -135,8 +126,7 @@ CREATE TABLE pesanan
 
     CONSTRAINT fk_pesanan_pengguna FOREIGN KEY (id_pengguna) REFERENCES pengguna (id_pengguna),
     CONSTRAINT fk_pesanan_tipe FOREIGN KEY (id_tipe_kendaraan) REFERENCES tipe_kendaraan (id_tipe),
-    CONSTRAINT fk_pesanan_kendaraan FOREIGN KEY (id_kendaraan) REFERENCES kendaraan (id_kendaraan),
-    CONSTRAINT fk_pesanan_admin FOREIGN KEY (id_admin) REFERENCES admin (id_admin)
+    CONSTRAINT fk_pesanan_kendaraan FOREIGN KEY (id_kendaraan) REFERENCES kendaraan (id_kendaraan)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ------------------------------------------------------------

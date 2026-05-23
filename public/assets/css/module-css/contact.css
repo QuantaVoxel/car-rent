@@ -57,6 +57,7 @@
 }
 
 .contact-one__input-box input[type="text"],
+.contact-one__input-box input[type="password"],
 .contact-one__input-box input[type="email"] {
     height: 60px;
     width: 100%;
