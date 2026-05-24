@@ -133,6 +133,13 @@ $tipes = TipeKendaraan::all();
                                         <td><?= $item['id_kendaraan'] ?></td>
                                         <td>
                                             <div class="d-flex align-items-center">
+                                                <div class="symbol symbol-50px me-3">
+                                                    <?php if ($item['foto_kendaraan']): ?>
+                                                        <img src="/uploads/<?= $item['foto_kendaraan'] ?>" alt="Foto" />
+                                                    <?php else: ?>
+                                                        <div class="symbol-label fs-3 bg-light-primary text-primary"><?= substr($item['nama_kendaraan'], 0, 1) ?></div>
+                                                    <?php endif; ?>
+                                                </div>
                                                 <div class="ms-0">
                                                     <a href="#" class="text-gray-800 text-hover-primary fs-5 fw-bold"><?= htmlspecialchars($item['nama_kendaraan']) ?></a>
                                                     <div class="text-muted fs-7"><?= htmlspecialchars($item['warna']) ?> (<?= $item['tahun'] ?>)</div>
@@ -182,7 +189,7 @@ $tipes = TipeKendaraan::all();
                                     <div class="modal fade" id="kt_modal_edit_item_<?= $item['id_kendaraan'] ?>" tabindex="-1" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered mw-650px">
                                             <div class="modal-content">
-                                                <form class="form" action="/process/kendaraan/update.php" method="POST">
+                                                <form class="form" action="/process/kendaraan/update.php" method="POST" enctype="multipart/form-data">
                                                     <input type="hidden" name="id_kendaraan" value="<?= $item['id_kendaraan'] ?>">
                                                     <div class="modal-header">
                                                         <h2 class="fw-bold">Edit Kendaraan</h2>
@@ -191,6 +198,24 @@ $tipes = TipeKendaraan::all();
                                                         </div>
                                                     </div>
                                                     <div class="modal-body py-10 px-lg-17">
+                                                        <div class="fv-row mb-7 text-center">
+                                                            <label class="d-block fw-semibold fs-6 mb-5">Foto Kendaraan</label>
+                                                            <div class="image-input image-input-outline <?= $item['foto_kendaraan'] ? '' : 'image-input-placeholder' ?>" data-kt-image-input="true">
+                                                                <div class="image-input-wrapper w-125px h-125px" style="background-image: url('<?= $item['foto_kendaraan'] ? '/uploads/'.$item['foto_kendaraan'] : 'none' ?>')"></div>
+                                                                <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Ubah Foto">
+                                                                    <i class="ki-duotone ki-pencil fs-7"><span class="path1"></span><span class="path2"></span></i>
+                                                                    <input type="file" name="foto_kendaraan" accept=".png, .jpg, .jpeg" />
+                                                                    <input type="hidden" name="avatar_remove" />
+                                                                </label>
+                                                                <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel">
+                                                                    <i class="ki-duotone ki-cross fs-2"><span class="path1"></span><span class="path2"></span></i>
+                                                                </span>
+                                                                <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove">
+                                                                    <i class="ki-duotone ki-cross fs-2"><span class="path1"></span><span class="path2"></span></i>
+                                                                </span>
+                                                            </div>
+                                                            <div class="form-text">Tipe file: png, jpg, jpeg.</div>
+                                                        </div>
                                                         <div class="fv-row mb-7">
                                                             <label class="required fs-6 fw-semibold mb-2">Nama Kendaraan</label>
                                                             <input type="text" class="form-control form-control-solid" name="nama_kendaraan" value="<?= htmlspecialchars($item['nama_kendaraan']) ?>" required />
@@ -316,7 +341,7 @@ $tipes = TipeKendaraan::all();
     <div class="modal fade" id="kt_modal_add_item" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered mw-650px">
             <div class="modal-content">
-                <form class="form" action="/process/kendaraan/create.php" method="POST">
+                <form class="form" action="/process/kendaraan/create.php" method="POST" enctype="multipart/form-data">
                     <div class="modal-header">
                         <h2 class="fw-bold">Tambah Kendaraan</h2>
                         <div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
@@ -327,6 +352,32 @@ $tipes = TipeKendaraan::all();
                         <div class="fv-row mb-7">
                             <label class="required fs-6 fw-semibold mb-2">Nama Kendaraan</label>
                             <input type="text" class="form-control form-control-solid" name="nama_kendaraan" placeholder="Contoh: Toyota Avanza" required />
+                        </div>
+                        <div class="fv-row mb-7 text-center">
+                            <label class="d-block fw-semibold fs-6 mb-5">Foto Kendaraan</label>
+                            <style>
+                                .image-input-placeholder {
+                                    background-image: url('/assets/admin/media/svg/avatars/blank.svg');
+                                }
+                                [data-bs-theme="dark"] .image-input-placeholder {
+                                    background-image: url('/assets/admin/media/svg/avatars/blank-dark.svg');
+                                }
+                            </style>
+                            <div class="image-input image-input-outline image-input-placeholder" data-kt-image-input="true">
+                                <div class="image-input-wrapper w-125px h-125px" style="background-image: none;"></div>
+                                <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Upload Foto">
+                                    <i class="ki-duotone ki-pencil fs-7"><span class="path1"></span><span class="path2"></span></i>
+                                    <input type="file" name="foto_kendaraan" accept=".png, .jpg, .jpeg" />
+                                    <input type="hidden" name="avatar_remove" />
+                                </label>
+                                <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel">
+                                    <i class="ki-duotone ki-cross fs-2"><span class="path1"></span><span class="path2"></span></i>
+                                </span>
+                                <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove">
+                                    <i class="ki-duotone ki-cross fs-2"><span class="path1"></span><span class="path2"></span></i>
+                                </span>
+                            </div>
+                            <div class="form-text">Tipe file: png, jpg, jpeg.</div>
                         </div>
                         <div class="row g-9 mb-7">
                             <div class="col-md-6 fv-row">

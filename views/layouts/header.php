@@ -69,6 +69,10 @@
     <link rel="stylesheet" href="assets/css/module-css/contact.css"/>
     <link rel="stylesheet" href="assets/css/module-css/feature.css"/>
 
+    <link rel="stylesheet" href="assets/css/module-css/page-header.css" />
+    <link rel="stylesheet" href="assets/css/module-css/error.css" />
+    <link rel="stylesheet" href="assets/css/module-css/shop.css" />
+
     <!-- template styles -->
     <link rel="stylesheet" href="assets/css/style.css"/>
     <link rel="stylesheet" href="assets/css/responsive.css"/>
