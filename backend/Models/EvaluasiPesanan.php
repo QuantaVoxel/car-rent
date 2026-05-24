@@ -2,21 +2,60 @@
 
 namespace Backend\CarRent\Models;
 
-class EvaluasiPesanan
+class EvaluasiPesanan extends BaseModel
 {
-    public static function all()
+    public static function all(array $with = [])
     {
         $db = database();
-        $stmt = $db->query("SELECT * FROM evaluasi_pesanan");
-        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        $selects = ["e.*"];
+        $joins = [];
+        $withTypes = [];
+
+        if (in_array('pesanan', $with)) {
+            $selects[] = "p.kode_pesanan AS pesanan__kode_pesanan, p.status_pesanan AS pesanan__status_pesanan";
+            $joins[] = "LEFT JOIN pesanan p ON e.id_pesanan = p.id_pesanan";
+            $withTypes['pesanan'] = 'one';
+        }
+
+        if (in_array('pengguna', $with)) {
+            $selects[] = "u.nama_lengkap AS pengguna__nama_lengkap, u.email AS pengguna__email";
+            $joins[] = "LEFT JOIN pengguna u ON e.id_pengguna = u.id_pengguna";
+            $withTypes['pengguna'] = 'one';
+        }
+
+        $sql = "SELECT " . implode(', ', $selects) . " FROM evaluasi_pesanan e " . implode(' ', $joins);
+        $stmt = $db->query($sql);
+        $rows = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+        $result = self::mapRows($rows, 'id_evaluasi', $withTypes);
+        return new \Bag\Collection($result);
     }
 
-    public static function find($id)
+    public static function find($id, array $with = [])
     {
         $db = database();
-        $stmt = $db->prepare("SELECT * FROM evaluasi_pesanan WHERE id_evaluasi = ?");
+        $selects = ["e.*"];
+        $joins = [];
+        $withTypes = [];
+
+        if (in_array('pesanan', $with)) {
+            $selects[] = "p.kode_pesanan AS pesanan__kode_pesanan, p.status_pesanan AS pesanan__status_pesanan";
+            $joins[] = "LEFT JOIN pesanan p ON e.id_pesanan = p.id_pesanan";
+            $withTypes['pesanan'] = 'one';
+        }
+
+        if (in_array('pengguna', $with)) {
+            $selects[] = "u.nama_lengkap AS pengguna__nama_lengkap, u.email AS pengguna__email";
+            $joins[] = "LEFT JOIN pengguna u ON e.id_pengguna = u.id_pengguna";
+            $withTypes['pengguna'] = 'one';
+        }
+
+        $sql = "SELECT " . implode(', ', $selects) . " FROM evaluasi_pesanan e " . implode(' ', $joins) . " WHERE e.id_evaluasi = ?";
+        $stmt = $db->prepare($sql);
         $stmt->execute([$id]);
-        return $stmt->fetch(\PDO::FETCH_ASSOC);
+        $row = $stmt->fetch(\PDO::FETCH_ASSOC);
+
+        return $row ? self::mapSingleRow($row, $withTypes) : null;
     }
 
     public static function create(array $data)

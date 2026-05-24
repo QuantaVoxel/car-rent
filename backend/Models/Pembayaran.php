@@ -2,21 +2,48 @@
 
 namespace Backend\CarRent\Models;
 
-class Pembayaran
+class Pembayaran extends BaseModel
 {
-    public static function all()
+    public static function all(array $with = [])
     {
         $db = database();
-        $stmt = $db->query("SELECT * FROM pembayaran");
-        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        $selects = ["pm.*"];
+        $joins = [];
+        $withTypes = [];
+
+        if (in_array('pesanan', $with)) {
+            $selects[] = "p.kode_pesanan AS pesanan__kode_pesanan, p.status_pesanan AS pesanan__status_pesanan, p.total_tarif AS pesanan__total_tarif";
+            $joins[] = "LEFT JOIN pesanan p ON pm.id_pesanan = p.id_pesanan";
+            $withTypes['pesanan'] = 'one';
+        }
+
+        $sql = "SELECT " . implode(', ', $selects) . " FROM pembayaran pm " . implode(' ', $joins);
+        $stmt = $db->query($sql);
+        $rows = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+        $result = self::mapRows($rows, 'id_pembayaran', $withTypes);
+        return new \Bag\Collection($result);
     }
 
-    public static function find($id)
+    public static function find($id, array $with = [])
     {
         $db = database();
-        $stmt = $db->prepare("SELECT * FROM pembayaran WHERE id_pembayaran = ?");
+        $selects = ["pm.*"];
+        $joins = [];
+        $withTypes = [];
+
+        if (in_array('pesanan', $with)) {
+            $selects[] = "p.kode_pesanan AS pesanan__kode_pesanan, p.status_pesanan AS pesanan__status_pesanan, p.total_tarif AS pesanan__total_tarif";
+            $joins[] = "LEFT JOIN pesanan p ON pm.id_pesanan = p.id_pesanan";
+            $withTypes['pesanan'] = 'one';
+        }
+
+        $sql = "SELECT " . implode(', ', $selects) . " FROM pembayaran pm " . implode(' ', $joins) . " WHERE pm.id_pembayaran = ?";
+        $stmt = $db->prepare($sql);
         $stmt->execute([$id]);
-        return $stmt->fetch(\PDO::FETCH_ASSOC);
+        $row = $stmt->fetch(\PDO::FETCH_ASSOC);
+
+        return $row ? self::mapSingleRow($row, $withTypes) : null;
     }
 
     public static function create(array $data)

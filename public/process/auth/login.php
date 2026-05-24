@@ -7,7 +7,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (auth()->attempt($email, $password)) {
         set_flash('success', 'Login berhasil. Selamat datang!');
-        header('Location: ../../index.php');
+
+        if (auth()->isAdmin()) {
+            header('Location: ../../admin/index.php');
+        } else {
+            header('Location: ../../index.php');
+        }
         exit;
     } else {
         set_flash('error', 'Login gagal. Email atau password salah.');

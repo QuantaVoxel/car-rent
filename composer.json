@@ -14,5 +14,10 @@
             "email": "loe@gmail.com"
         }
     ],
-    "require": {}
+    "require-dev": {
+        "symfony/var-dumper": "^8.0"
+    },
+    "require": {
+        "beacon-hq/bag": "^2.6"
+    }
 }

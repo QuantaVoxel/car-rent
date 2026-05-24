@@ -2,21 +2,48 @@
 
 namespace Backend\CarRent\Models;
 
-class Kendaraan
+class Kendaraan extends BaseModel
 {
-    public static function all()
+    public static function all(array $with = [])
     {
         $db = database();
-        $stmt = $db->query("SELECT * FROM kendaraan");
-        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        $selects = ["k.*"];
+        $joins = [];
+        $withTypes = [];
+
+        if (in_array('tipe_kendaraan', $with)) {
+            $selects[] = "t.nama_tipe AS tipe_kendaraan__nama_tipe, t.deskripsi AS tipe_kendaraan__deskripsi, t.kapasitas AS tipe_kendaraan__kapasitas, t.tarif_per_km AS tipe_kendaraan__tarif_per_km, t.tarif_base AS tipe_kendaraan__tarif_base, t.icon_url AS tipe_kendaraan__icon_url";
+            $joins[] = "LEFT JOIN tipe_kendaraan t ON k.id_tipe = t.id_tipe";
+            $withTypes['tipe_kendaraan'] = 'one';
+        }
+
+        $sql = "SELECT " . implode(', ', $selects) . " FROM kendaraan k " . implode(' ', $joins);
+        $stmt = $db->query($sql);
+        $rows = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+        $result = self::mapRows($rows, 'id_kendaraan', $withTypes);
+        return new \Bag\Collection($result);
     }
 
-    public static function find($id)
+    public static function find($id, array $with = [])
     {
         $db = database();
-        $stmt = $db->prepare("SELECT * FROM kendaraan WHERE id_kendaraan = ?");
+        $selects = ["k.*"];
+        $joins = [];
+        $withTypes = [];
+
+        if (in_array('tipe_kendaraan', $with)) {
+            $selects[] = "t.nama_tipe AS tipe_kendaraan__nama_tipe, t.deskripsi AS tipe_kendaraan__deskripsi, t.kapasitas AS tipe_kendaraan__kapasitas, t.tarif_per_km AS tipe_kendaraan__tarif_per_km, t.tarif_base AS tipe_kendaraan__tarif_base, t.icon_url AS tipe_kendaraan__icon_url";
+            $joins[] = "LEFT JOIN tipe_kendaraan t ON k.id_tipe = t.id_tipe";
+            $withTypes['tipe_kendaraan'] = 'one';
+        }
+
+        $sql = "SELECT " . implode(', ', $selects) . " FROM kendaraan k " . implode(' ', $joins) . " WHERE k.id_kendaraan = ?";
+        $stmt = $db->prepare($sql);
         $stmt->execute([$id]);
-        return $stmt->fetch(\PDO::FETCH_ASSOC);
+        $row = $stmt->fetch(\PDO::FETCH_ASSOC);
+
+        return $row ? self::mapSingleRow($row, $withTypes) : null;
     }
 
     public static function create(array $data)

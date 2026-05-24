@@ -2,21 +2,63 @@
 
 namespace Backend\CarRent\Models;
 
-class TipeKendaraan
+class TipeKendaraan extends BaseModel
 {
-    public static function all()
+    public static function all(array $with = [])
     {
         $db = database();
-        $stmt = $db->query("SELECT * FROM tipe_kendaraan");
-        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        $selects = ["t.*"];
+        $joins = [];
+        $withTypes = [];
+
+        if (in_array('kendaraan', $with)) {
+            $selects[] = "k.id_kendaraan AS kendaraan__id_kendaraan, k.nama_kendaraan AS kendaraan__nama_kendaraan, k.plat_nomor AS kendaraan__plat_nomor";
+            $joins[] = "LEFT JOIN kendaraan k ON t.id_tipe = k.id_tipe";
+            $withTypes['kendaraan'] = 'many';
+        }
+
+        if (in_array('pesanan', $with)) {
+            $selects[] = "p.id_pesanan AS pesanan__id_pesanan, p.kode_pesanan AS pesanan__kode_pesanan, p.status_pesanan AS pesanan__status_pesanan";
+            $joins[] = "LEFT JOIN pesanan p ON t.id_tipe = p.id_tipe_kendaraan";
+            $withTypes['pesanan'] = 'many';
+        }
+
+        $sql = "SELECT " . implode(', ', $selects) . " FROM tipe_kendaraan t " . implode(' ', $joins);
+        $stmt = $db->query($sql);
+        $rows = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+        $result = self::mapRows($rows, 'id_tipe', $withTypes);
+        return new \Bag\Collection($result);
     }
 
-    public static function find($id)
+    public static function find($id, array $with = [])
     {
         $db = database();
-        $stmt = $db->prepare("SELECT * FROM tipe_kendaraan WHERE id_tipe = ?");
+        $selects = ["t.*"];
+        $joins = [];
+        $withTypes = [];
+
+        if (in_array('kendaraan', $with)) {
+            $selects[] = "k.id_kendaraan AS kendaraan__id_kendaraan, k.nama_kendaraan AS kendaraan__nama_kendaraan, k.plat_nomor AS kendaraan__plat_nomor";
+            $joins[] = "LEFT JOIN kendaraan k ON t.id_tipe = k.id_tipe";
+            $withTypes['kendaraan'] = 'many';
+        }
+
+        if (in_array('pesanan', $with)) {
+            $selects[] = "p.id_pesanan AS pesanan__id_pesanan, p.kode_pesanan AS pesanan__kode_pesanan, p.status_pesanan AS pesanan__status_pesanan";
+            $joins[] = "LEFT JOIN pesanan p ON t.id_tipe = p.id_tipe_kendaraan";
+            $withTypes['pesanan'] = 'many';
+        }
+
+        $sql = "SELECT " . implode(', ', $selects) . " FROM tipe_kendaraan t " . implode(' ', $joins) . " WHERE t.id_tipe = ?";
+        $stmt = $db->prepare($sql);
         $stmt->execute([$id]);
-        return $stmt->fetch(\PDO::FETCH_ASSOC);
+        $rows = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+        if (empty($rows)) return null;
+
+        $mapped = self::mapRows($rows, 'id_tipe', $withTypes);
+        return $mapped[0] ?? null;
     }
 
     public static function create(array $data)

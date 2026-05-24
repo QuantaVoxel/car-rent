@@ -2,21 +2,63 @@
 
 namespace Backend\CarRent\Models;
 
-class Pengguna
+class Pengguna extends BaseModel
 {
-    public static function all()
+    public static function all(array $with = [])
     {
         $db = database();
-        $stmt = $db->query("SELECT * FROM pengguna");
-        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        $selects = ["u.*"];
+        $joins = [];
+        $withTypes = [];
+
+        if (in_array('pesanan', $with)) {
+            $selects[] = "p.id_pesanan AS pesanan__id_pesanan, p.kode_pesanan AS pesanan__kode_pesanan, p.status_pesanan AS pesanan__status_pesanan";
+            $joins[] = "LEFT JOIN pesanan p ON u.id_pengguna = p.id_pengguna";
+            $withTypes['pesanan'] = 'many';
+        }
+
+        if (in_array('evaluasi', $with)) {
+            $selects[] = "e.id_evaluasi AS evaluasi__id_evaluasi, e.rating AS evaluasi__rating, e.komentar AS evaluasi__komentar";
+            $joins[] = "LEFT JOIN evaluasi_pesanan e ON u.id_pengguna = e.id_pengguna";
+            $withTypes['evaluasi'] = 'many';
+        }
+
+        $sql = "SELECT " . implode(', ', $selects) . " FROM pengguna u " . implode(' ', $joins);
+        $stmt = $db->query($sql);
+        $rows = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+        $result = self::mapRows($rows, 'id_pengguna', $withTypes);
+        return new \Bag\Collection($result);
     }
 
-    public static function find($id)
+    public static function find($id, array $with = [])
     {
         $db = database();
-        $stmt = $db->prepare("SELECT * FROM pengguna WHERE id_pengguna = ?");
+        $selects = ["u.*"];
+        $joins = [];
+        $withTypes = [];
+
+        if (in_array('pesanan', $with)) {
+            $selects[] = "p.id_pesanan AS pesanan__id_pesanan, p.kode_pesanan AS pesanan__kode_pesanan, p.status_pesanan AS pesanan__status_pesanan";
+            $joins[] = "LEFT JOIN pesanan p ON u.id_pengguna = p.id_pengguna";
+            $withTypes['pesanan'] = 'many';
+        }
+
+        if (in_array('evaluasi', $with)) {
+            $selects[] = "e.id_evaluasi AS evaluasi__id_evaluasi, e.rating AS evaluasi__rating, e.komentar AS evaluasi__komentar";
+            $joins[] = "LEFT JOIN evaluasi_pesanan e ON u.id_pengguna = e.id_pengguna";
+            $withTypes['evaluasi'] = 'many';
+        }
+
+        $sql = "SELECT " . implode(', ', $selects) . " FROM pengguna u " . implode(' ', $joins) . " WHERE u.id_pengguna = ?";
+        $stmt = $db->prepare($sql);
         $stmt->execute([$id]);
-        return $stmt->fetch(\PDO::FETCH_ASSOC);
+        $rows = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+        if (empty($rows)) return null;
+
+        $mapped = self::mapRows($rows, 'id_pengguna', $withTypes);
+        return $mapped[0] ?? null;
     }
 
     public static function findByEmail($email)

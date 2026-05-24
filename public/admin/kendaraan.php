@@ -4,8 +4,9 @@ require_once __DIR__ . '/../../backend/bootstrap.php';
 use Backend\CarRent\Models\Kendaraan;
 use Backend\CarRent\Models\TipeKendaraan;
 
-$items = Kendaraan::all();
+$items = Kendaraan::all(['tipe_kendaraan']);
 $tipes = TipeKendaraan::all();
+
 ?>
 <?= layout('admin/header') ?>
     <div class="app-main flex-column flex-row-fluid " id="kt_app_main">
@@ -108,7 +109,7 @@ $tipes = TipeKendaraan::all();
                                             </div>
                                         </td>
                                         <td><?= htmlspecialchars($item['plat_nomor']) ?></td>
-                                        <td><?= htmlspecialchars($item['nama_tipe'] ?? 'N/A') ?></td>
+                                        <td><?= htmlspecialchars($item['tipe_kendaraan']['nama_tipe'] ?? 'N/A') ?></td>
                                         <td class="text-end">Rp <?= number_format($item['harga_perhari'], 0, ',', '.') ?></td>
                                         <td class="text-end">
                                             <?php 

@@ -4,18 +4,18 @@
 --  Revisi: Tanpa modul Driver. Admin yang mengelola & menyiapkan kendaraan.
 -- ============================================================
 
-DROP table IF EXISTS `pesanan`;
-DROP table IF EXISTS `pembayaran`;
-DROP table IF EXISTS `evaluasi_pesanan`;
-DROP table IF EXISTS `log_pesanan`;
-DROP table IF EXISTS `kendaraan`;
-DROP table IF EXISTS `tipe_kendaraan`;
-DROP table IF EXISTS `pengguna`;
+SET FOREIGN_KEY_CHECKS = 0;
 
-SET
-FOREIGN_KEY_CHECKS = 0;
-SET
-SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+DROP TABLE IF EXISTS `pembayaran`;
+DROP TABLE IF EXISTS `evaluasi_pesanan`;
+DROP TABLE IF EXISTS `log_pesanan`;
+DROP TABLE IF EXISTS `pesanan`;
+DROP TABLE IF EXISTS `kendaraan`;
+DROP TABLE IF EXISTS `tipe_kendaraan`;
+DROP TABLE IF EXISTS `pengguna`;
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+
 
 -- ------------------------------------------------------------
 -- 1. TABEL PENGGUNA
@@ -91,11 +91,11 @@ CREATE TABLE pesanan
 
     -- Lokasi
     lokasi_jemput     VARCHAR(255)   NOT NULL,
-    latitude_jemput   DECIMAL(10, 8) NOT NULL,
-    longitude_jemput  DECIMAL(11, 8) NOT NULL,
+    latitude_jemput   DECIMAL(10, 8) NULL,
+    longitude_jemput  DECIMAL(11, 8) NULL,
     lokasi_tujuan     VARCHAR(255)   NOT NULL,
-    latitude_tujuan   DECIMAL(10, 8) NOT NULL,
-    longitude_tujuan  DECIMAL(11, 8) NOT NULL,
+    latitude_tujuan   DECIMAL(10, 8) NULL,
+    longitude_tujuan  DECIMAL(11, 8) NULL,
     jarak_km          DECIMAL(8, 2) NULL,             -- Diisi setelah kalkulasi rute
 
     -- Tarif
@@ -206,3 +206,5 @@ CREATE TABLE log_pesanan
 -- pesanan        -|------<  log_pesanan
 -- pesanan        -|------<  notifikasi
 -- ============================================================
+
+SET FOREIGN_KEY_CHECKS = 1;

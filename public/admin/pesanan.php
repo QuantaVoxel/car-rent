@@ -305,10 +305,14 @@ $kendaraans = Kendaraan::all();
                         <div class="fv-row mb-7">
                             <label class="required fs-6 fw-semibold mb-2">Lokasi Jemput</label>
                             <input type="text" class="form-control form-control-solid" name="lokasi_jemput" required />
+                            <input type="hidden" name="latitude_jemput" value="0" />
+                            <input type="hidden" name="longitude_jemput" value="0" />
                         </div>
                         <div class="fv-row mb-7">
                             <label class="required fs-6 fw-semibold mb-2">Lokasi Tujuan</label>
                             <input type="text" class="form-control form-control-solid" name="lokasi_tujuan" required />
+                            <input type="hidden" name="latitude_tujuan" value="0" />
+                            <input type="hidden" name="longitude_tujuan" value="0" />
                         </div>
                         <div class="row g-9 mb-7">
                             <div class="col-md-6 fv-row">

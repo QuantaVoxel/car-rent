@@ -2,6 +2,8 @@
 
 namespace Backend\CarRent;
 
+use Bag\Collection;
+
 class Auth
 {
     private string $name = 'auth_session';
@@ -16,9 +18,9 @@ class Auth
         return isset($_SESSION[$this->name]);
     }
 
-    public function user(): array
+    public function user(): Collection
     {
-        return $_SESSION[$this->name] ?? [];
+        return new Collection($_SESSION[$this->name] ?? []);
     }
 
     public function attempt(string $email, string $password): bool
