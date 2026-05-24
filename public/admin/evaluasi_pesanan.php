@@ -3,7 +3,7 @@ require_once __DIR__ . '/../../backend/bootstrap.php';
 
 use Backend\CarRent\Models\EvaluasiPesanan;
 
-$items = EvaluasiPesanan::all();
+$items = EvaluasiPesanan::all(['pesanan', 'pengguna']);
 ?>
 <?= layout('admin/header') ?>
     <div class="app-main flex-column flex-row-fluid " id="kt_app_main">
@@ -92,9 +92,9 @@ $items = EvaluasiPesanan::all();
                                     <tr>
                                         <td><?= $item['id_evaluasi'] ?></td>
                                         <td>
-                                            <span class="text-gray-800 fw-bold"><?= htmlspecialchars($item['kode_pesanan'] ?? 'N/A') ?></span>
+                                            <span class="text-gray-800 fw-bold"><?= htmlspecialchars($item['pesanan']['kode_pesanan'] ?? 'N/A') ?></span>
                                         </td>
-                                        <td><?= htmlspecialchars($item['nama_pelanggan'] ?? 'N/A') ?></td>
+                                        <td><?= htmlspecialchars($item['pengguna']['nama_lengkap'] ?? 'N/A') ?></td>
                                         <td>
                                             <div class="rating">
                                                 <?php for($i=1; $i<=5; $i++): ?>

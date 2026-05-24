@@ -112,26 +112,81 @@ class Pesanan extends BaseModel
     public static function create(array $data)
     {
         $db = database();
+
+        // Sanitize data: convert empty strings to null for nullable fields
+        foreach ($data as $key => $value) {
+            if ($value === '') {
+                $data[$key] = null;
+            }
+        }
         
-        // Generate kode_pesanan if not provided
+        // 1. Generate kode_pesanan if not provided (more robust)
         if (!isset($data['kode_pesanan'])) {
             $prefix = 'ORD-' . date('Ymd') . '-';
             $stmt = $db->prepare("SELECT COUNT(*) FROM pesanan WHERE kode_pesanan LIKE ?");
             $stmt->execute([$prefix . '%']);
             $count = $stmt->fetchColumn();
-            $data['kode_pesanan'] = $prefix . str_pad($count + 1, 3, '0', STR_PAD_LEFT);
+            // Total length example: ORD-20260523-001-ABCD (21 characters)
+            $data['kode_pesanan'] = $prefix . str_pad($count + 1, 3, '0', STR_PAD_LEFT) . '-' . strtoupper(substr(md5(uniqid()), 0, 4));
+        }
+
+        // 2. Auto-calculate tarifs if tipe_kendaraan and jarak_km are present
+        if (isset($data['id_tipe_kendaraan']) && isset($data['jarak_km'])) {
+            $stmtTipe = $db->prepare("SELECT tarif_base, tarif_per_km FROM tipe_kendaraan WHERE id_tipe = ?");
+            $stmtTipe->execute([$data['id_tipe_kendaraan']]);
+            $tipe = $stmtTipe->fetch(\PDO::FETCH_ASSOC);
+
+            if ($tipe) {
+                $data['tarif_base'] = $tipe['tarif_base'];
+                $data['tarif_jarak'] = $data['jarak_km'] * $tipe['tarif_per_km'];
+                $data['total_tarif'] = $data['tarif_base'] + $data['tarif_jarak'];
+            }
+        }
+
+        // 3. Set id_admin if an admin is creating the order
+        if (function_exists('auth') && auth()->check() && auth()->isAdmin()) {
+            $data['id_admin'] = auth()->user()['id_pengguna'];
+        }
+
+        if (!isset($data['status_pesanan'])) {
+            $data['status_pesanan'] = 'menunggu_konfirmasi';
         }
 
         $columns = implode(', ', array_keys($data));
         $placeholders = implode(', ', array_fill(0, count($data), '?'));
         $stmt = $db->prepare("INSERT INTO pesanan ($columns) VALUES ($placeholders)");
         $stmt->execute(array_values($data));
-        return $db->lastInsertId();
+        $id_pesanan = $db->lastInsertId();
+
+        $dibuat_oleh = 'pengguna';
+        if (php_sapi_name() !== 'cli' && function_exists('auth') && auth()->check() && auth()->isAdmin()) {
+            $dibuat_oleh = 'admin';
+        } elseif (php_sapi_name() === 'cli') {
+            $dibuat_oleh = 'sistem';
+        }
+
+        $stmtLog = $db->prepare("INSERT INTO log_pesanan (id_pesanan, status_lama, status_baru, keterangan, dibuat_oleh) VALUES (?, ?, ?, ?, ?)");
+        $stmtLog->execute([$id_pesanan, null, $data['status_pesanan'], 'Pesanan dibuat', $dibuat_oleh]);
+
+        return $id_pesanan;
     }
 
     public static function update($id, array $data)
     {
         $db = database();
+
+        // Sanitize data: convert empty strings to null for nullable fields
+        foreach ($data as $key => $value) {
+            if ($value === '') {
+                $data[$key] = null;
+            }
+        }
+
+        // Get old status
+        $stmtOld = $db->prepare("SELECT status_pesanan FROM pesanan WHERE id_pesanan = ?");
+        $stmtOld->execute([$id]);
+        $old_status = $stmtOld->fetchColumn();
+
         $sets = [];
         foreach (array_keys($data) as $column) {
             $sets[] = "$column = ?";
@@ -140,7 +195,21 @@ class Pesanan extends BaseModel
         $stmt = $db->prepare("UPDATE pesanan SET $setStr WHERE id_pesanan = ?");
         $values = array_values($data);
         $values[] = $id;
-        return $stmt->execute($values);
+        $result = $stmt->execute($values);
+
+        // Check if status changed
+        if (isset($data['status_pesanan']) && $data['status_pesanan'] !== $old_status) {
+            $dibuat_oleh = 'pengguna';
+            if (php_sapi_name() !== 'cli' && function_exists('auth') && auth()->check() && auth()->isAdmin()) {
+                $dibuat_oleh = 'admin';
+            } elseif (php_sapi_name() === 'cli') {
+                $dibuat_oleh = 'sistem';
+            }
+            $stmtLog = $db->prepare("INSERT INTO log_pesanan (id_pesanan, status_lama, status_baru, keterangan, dibuat_oleh) VALUES (?, ?, ?, ?, ?)");
+            $stmtLog->execute([$id, $old_status, $data['status_pesanan'], 'Status pesanan diupdate', $dibuat_oleh]);
+        }
+
+        return $result;
     }
 
     public static function delete($id)

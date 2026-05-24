@@ -3,7 +3,7 @@ require_once __DIR__ . '/../../backend/bootstrap.php';
 
 use Backend\CarRent\Models\LogPesanan;
 
-$items = LogPesanan::all();
+$items = LogPesanan::all(['pesanan']);
 ?>
 <?= layout('admin/header') ?>
     <div class="app-main flex-column flex-row-fluid " id="kt_app_main">
@@ -66,11 +66,11 @@ $items = LogPesanan::all();
                                             <?= date('d M Y H:i', strtotime($item['created_at'])) ?>
                                         </td>
                                         <td>
-                                            <span class="text-gray-800 fw-bold"><?= htmlspecialchars($item['kode_pesanan'] ?? 'N/A') ?></span>
+                                            <span class="text-gray-800 fw-bold"><?= htmlspecialchars($item['pesanan']['kode_pesanan'] ?? 'N/A') ?></span>
                                         </td>
                                         <td>
                                             <div class="d-flex align-items-center">
-                                                <span class="badge badge-light-secondary fs-8"><?= str_replace('_', ' ', $item['status_lama'] ?? 'N/A') ?></span>
+                                                <span class="badge badge-light-secondary fs-8"><?= $item['status_lama'] ? str_replace('_', ' ', $item['status_lama']) : '-' ?></span>
                                                 <i class="ki-duotone ki-arrow-right fs-6 mx-2"></i>
                                                 <?php 
                                                 $status_class = [

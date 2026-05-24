@@ -49,6 +49,14 @@ class Kendaraan extends BaseModel
     public static function create(array $data)
     {
         $db = database();
+
+        // Sanitize data: convert empty strings to null
+        foreach ($data as $key => $value) {
+            if ($value === '') {
+                $data[$key] = null;
+            }
+        }
+
         $columns = implode(', ', array_keys($data));
         $placeholders = implode(', ', array_fill(0, count($data), '?'));
         $stmt = $db->prepare("INSERT INTO kendaraan ($columns) VALUES ($placeholders)");
@@ -59,6 +67,14 @@ class Kendaraan extends BaseModel
     public static function update($id, array $data)
     {
         $db = database();
+
+        // Sanitize data: convert empty strings to null
+        foreach ($data as $key => $value) {
+            if ($value === '') {
+                $data[$key] = null;
+            }
+        }
+
         $sets = [];
         foreach (array_keys($data) as $column) {
             $sets[] = "$column = ?";

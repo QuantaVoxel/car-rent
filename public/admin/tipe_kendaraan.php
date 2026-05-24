@@ -68,6 +68,45 @@ $items = TipeKendaraan::all();
                         </div>
                     <?php endif; ?>
 
+                    <?php
+                    $counts = [1 => 0, 0 => 0];
+                    foreach($items as $item) {
+                        $counts[$item['is_active']]++;
+                    }
+                    ?>
+                    <div class="row g-5 g-xl-10 mb-5">
+                        <div class="col-sm-6 col-md-4">
+                            <div class="card card-flush">
+                                <div class="card-header pt-5">
+                                    <div class="card-title d-flex flex-column">
+                                        <span class="fs-2hx fw-bold text-gray-900 me-2 lh-1 ls-n2"><?= count($items) ?></span>
+                                        <span class="text-gray-500 pt-1 fw-semibold fs-6">Total Tipe Kendaraan</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-4">
+                            <div class="card card-flush">
+                                <div class="card-header pt-5">
+                                    <div class="card-title d-flex flex-column">
+                                        <span class="fs-2hx fw-bold text-gray-900 me-2 lh-1 ls-n2"><?= $counts[1] ?></span>
+                                        <span class="text-gray-500 pt-1 fw-semibold fs-6">Aktif</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-4">
+                            <div class="card card-flush">
+                                <div class="card-header pt-5">
+                                    <div class="card-title d-flex flex-column">
+                                        <span class="fs-2hx fw-bold text-gray-900 me-2 lh-1 ls-n2"><?= $counts[0] ?></span>
+                                        <span class="text-gray-500 pt-1 fw-semibold fs-6">Nonaktif</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="card card-flush">
                         <div class="card-header align-items-center py-5 gap-2 gap-md-5">
                             <div class="card-title">

@@ -83,7 +83,7 @@ CREATE TABLE kendaraan
 CREATE TABLE pesanan
 (
     id_pesanan        INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    kode_pesanan      VARCHAR(20)    NOT NULL UNIQUE, -- Contoh: ORD-20260523-001
+    kode_pesanan      VARCHAR(30)    NOT NULL UNIQUE, -- Contoh: ORD-20260523-001-A4B2
     id_pengguna       INT UNSIGNED        NOT NULL,
     id_tipe_kendaraan INT UNSIGNED        NOT NULL,
     id_kendaraan      INT UNSIGNED        NULL,       -- Diisi admin saat memproses

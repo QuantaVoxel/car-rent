@@ -71,6 +71,37 @@ $tipes = TipeKendaraan::all();
                         </div>
                     <?php endif; ?>
 
+                    <?php
+                    $counts = [];
+                    foreach($items as $item) {
+                        $counts[$item['status']] = ($counts[$item['status']] ?? 0) + 1;
+                    }
+                    ?>
+                    <div class="row g-5 g-xl-10 mb-5">
+                        <div class="col-sm-6 col-md-4 col-lg-3">
+                            <div class="card card-flush">
+                                <div class="card-header pt-5">
+                                    <div class="card-title d-flex flex-column">
+                                        <span class="fs-2hx fw-bold text-gray-900 me-2 lh-1 ls-n2"><?= count($items) ?></span>
+                                        <span class="text-gray-500 pt-1 fw-semibold fs-6">Total Kendaraan</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <?php foreach(['tersedia', 'dipakai', 'perawatan', 'nonaktif'] as $status): ?>
+                        <div class="col-sm-6 col-md-4 col-lg-3">
+                            <div class="card card-flush">
+                                <div class="card-header pt-5">
+                                    <div class="card-title d-flex flex-column">
+                                        <span class="fs-2hx fw-bold text-gray-900 me-2 lh-1 ls-n2"><?= $counts[$status] ?? 0 ?></span>
+                                        <span class="text-gray-500 pt-1 fw-semibold fs-6 text-capitalize"><?= $status ?></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <?php endforeach; ?>
+                    </div>
+
                     <div class="card card-flush">
                         <div class="card-header align-items-center py-5 gap-2 gap-md-5">
                             <div class="card-title">

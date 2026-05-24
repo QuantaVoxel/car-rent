@@ -6,7 +6,7 @@ use Backend\CarRent\Models\Pengguna;
 use Backend\CarRent\Models\TipeKendaraan;
 use Backend\CarRent\Models\Kendaraan;
 
-$items = Pesanan::all();
+$items = Pesanan::all(['pengguna', 'tipe_kendaraan']);
 $penggunas = Pengguna::all();
 $tipes = TipeKendaraan::all();
 $kendaraans = Kendaraan::all();
@@ -74,6 +74,37 @@ $kendaraans = Kendaraan::all();
                         </div>
                     <?php endif; ?>
 
+                    <?php
+                    $counts = [];
+                    foreach($items as $item) {
+                        $counts[$item['status_pesanan']] = ($counts[$item['status_pesanan']] ?? 0) + 1;
+                    }
+                    ?>
+                    <div class="row g-5 g-xl-10 mb-5">
+                        <div class="col-sm-6 col-md-4 col-lg-3">
+                            <div class="card card-flush">
+                                <div class="card-header pt-5">
+                                    <div class="card-title d-flex flex-column">
+                                        <span class="fs-2hx fw-bold text-gray-900 me-2 lh-1 ls-n2"><?= count($items) ?></span>
+                                        <span class="text-gray-500 pt-1 fw-semibold fs-6">Total Pesanan</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <?php foreach(['menunggu_konfirmasi', 'dikonfirmasi', 'kendaraan_dikirim', 'dalam_perjalanan', 'selesai', 'dibatalkan'] as $status): ?>
+                        <div class="col-sm-6 col-md-4 col-lg-3">
+                            <div class="card card-flush">
+                                <div class="card-header pt-5">
+                                    <div class="card-title d-flex flex-column">
+                                        <span class="fs-2hx fw-bold text-gray-900 me-2 lh-1 ls-n2"><?= $counts[$status] ?? 0 ?></span>
+                                        <span class="text-gray-500 pt-1 fw-semibold fs-6 text-capitalize"><?= str_replace('_', ' ', $status) ?></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <?php endforeach; ?>
+                    </div>
+
                     <div class="card card-flush">
                         <div class="card-header align-items-center py-5 gap-2 gap-md-5">
                             <div class="card-title">
@@ -107,8 +138,8 @@ $kendaraans = Kendaraan::all();
                                         </td>
                                         <td>
                                             <div class="d-flex flex-column">
-                                                <span class="text-gray-800 fw-bold"><?= htmlspecialchars($item['nama_pelanggan'] ?? 'N/A') ?></span>
-                                                <span class="text-muted fs-7"><?= htmlspecialchars($item['nama_tipe'] ?? 'N/A') ?></span>
+                                                <span class="text-gray-800 fw-bold"><?= htmlspecialchars($item['pengguna']['nama_lengkap'] ?? 'N/A') ?></span>
+                                                <span class="text-muted fs-7"><?= htmlspecialchars($item['tipe_kendaraan']['nama_tipe'] ?? 'N/A') ?></span>
                                             </div>
                                         </td>
                                         <td>
@@ -315,13 +346,9 @@ $kendaraans = Kendaraan::all();
                             <input type="hidden" name="longitude_tujuan" value="0" />
                         </div>
                         <div class="row g-9 mb-7">
-                            <div class="col-md-6 fv-row">
+                            <div class="col-md-12 fv-row">
                                 <label class="required fs-6 fw-semibold mb-2">Jarak (KM)</label>
-                                <input type="number" step="0.01" class="form-control form-control-solid" name="jarak_km" required />
-                            </div>
-                            <div class="col-md-6 fv-row">
-                                <label class="required fs-6 fw-semibold mb-2">Total Tarif</label>
-                                <input type="number" class="form-control form-control-solid" name="total_tarif" required />
+                                <input type="number" step="0.01" class="form-control form-control-solid" name="jarak_km" placeholder="Masukkan jarak" required />
                             </div>
                         </div>
                         <div class="fv-row mb-7">
