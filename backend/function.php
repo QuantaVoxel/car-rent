@@ -3,9 +3,23 @@
 
 if (!function_exists('config')) {
 
-    function config(): array
+    function config(?string $name = null): mixed
     {
-        return require __DIR__ . "/config.php";
+        $config = require __DIR__ . '/config.php';
+
+        if ($name === null) {
+            return $config;
+        }
+
+        foreach (explode('.', $name) as $segment) {
+            if (!is_array($config) || !array_key_exists($segment, $config)) {
+                return null; // or throw exception
+            }
+
+            $config = $config[$segment];
+        }
+
+        return $config;
     }
 
 }

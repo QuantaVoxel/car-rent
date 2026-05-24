@@ -6,10 +6,15 @@ $auth = auth()->user()->toArray();
 <html lang="en">
 <meta http-equiv="content-type" content="text/html;charset=UTF-8"/><!-- /Added by HTTrack -->
 <head>
-    <title>Metronic - The World's #1 Selling Tailwind CSS & Bootstrap Admin Template by KeenThemes</title>
+    <title>GoRent Admin - Booking Kendaraan Online</title>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta property="og:locale" content="en_US"/>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicons/apple-touch-icon.png"/>
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicons/favicon-32x32.png"/>
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicons/favicon-16x16.png"/>
+    <link rel="manifest" href="/assets/images/favicons/site.webmanifest"/>
 
     <!--begin::Fonts(mandatory for all pages)-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700"/><!--end::Fonts-->
@@ -73,8 +78,8 @@ $auth = auth()->user()->toArray();
                 <!--begin::Logo-->
                 <div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0 me-lg-15">
                     <a href="/admin">
-                        <img alt="Logo" src="/assets/admin/media/logos/default-dark.svg"
-                             class="h-20px h-lg-30px app-sidebar-logo-default"/>
+                        <img alt="Logo" src="/assets/images/resources/logo-2.png"
+                             class="h-25px h-lg-35px app-sidebar-logo-default"/>
                     </a>
                 </div>
                 <!--end::Logo-->

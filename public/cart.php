@@ -2,12 +2,12 @@
 require_once __DIR__ . '/../backend/bootstrap.php';
 ?>
 
-<?= layout('header') ?>
+<?= layout('header', ['title' => 'Keranjang']) ?>
 
 <!--Start Cart Page-->
 <section class="cart-page">
     <div class="container">
-        <div class="row">
+        <div class="row" id="cart-container">
             <div class="col-xl-8 col-lg-7">
                 <div class="cart-page__left">
                     <div class="table-responsive">
@@ -16,130 +16,11 @@ require_once __DIR__ . '/../backend/bootstrap.php';
                             <tr>
                                 <th>Item</th>
                                 <th>Price</th>
-                                <th>Quantity</th>
-                                <th>Total</th>
-                                <th>Remove</th>
+                                <th>Actions</th>
                             </tr>
                             </thead>
-                            <tbody>
-
-                            <tr>
-                                <td>
-                                    <div class="product-box">
-                                        <div class="img-box">
-                                            <img src="assets/images/shop/cart-page-img-1.jpg" alt="">
-                                        </div>
-                                        <h3><a href="product-details.html">Gree Air Conditioner</a></h3>
-                                    </div>
-                                </td>
-                                <td>$10.99</td>
-                                <td>
-                                    <div class="quantity-box">
-                                        <button type="button" class="sub"><i
-                                                class="fa fa-minus"></i></button>
-                                        <input type="number" id="product-1" value="1" />
-                                        <button type="button" class="add"><i
-                                                class="fa fa-plus"></i></button>
-                                    </div>
-                                </td>
-                                <td>
-                                    $10.99
-                                </td>
-                                <td>
-                                    <div class="cross-icon">
-                                        <i class="fas fa-times"></i>
-                                    </div>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>
-                                    <div class="product-box">
-                                        <div class="img-box">
-                                            <img src="assets/images/shop/cart-page-img-2.jpg" alt="">
-                                        </div>
-                                        <h3><a href="product-details.html">Pliers | Cutting, Gripping</a>
-                                        </h3>
-                                    </div>
-                                </td>
-                                <td>$10.99</td>
-                                <td>
-                                    <div class="quantity-box">
-                                        <button type="button" class="sub"><i
-                                                class="fa fa-minus"></i></button>
-                                        <input type="number" id="product-2" value="1" />
-                                        <button type="button" class="add"><i
-                                                class="fa fa-plus"></i></button>
-                                    </div>
-                                </td>
-                                <td>
-                                    $10.99
-                                </td>
-                                <td>
-                                    <div class="cross-icon">
-                                        <i class="fas fa-times"></i>
-                                    </div>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>
-                                    <div class="product-box">
-                                        <div class="img-box">
-                                            <img src="assets/images/shop/cart-page-img-3.jpg" alt="">
-                                        </div>
-                                        <h3><a href="product-details.html">Gear and wrench</a></h3>
-                                    </div>
-                                </td>
-                                <td>$10.99</td>
-                                <td>
-                                    <div class="quantity-box">
-                                        <button type="button" class="sub"><i
-                                                class="fa fa-minus"></i></button>
-                                        <input type="number" id="product-3" value="1" />
-                                        <button type="button" class="add"><i
-                                                class="fa fa-plus"></i></button>
-                                    </div>
-                                </td>
-                                <td>
-                                    $10.99
-                                </td>
-                                <td>
-                                    <div class="cross-icon">
-                                        <i class="fas fa-times"></i>
-                                    </div>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>
-                                    <div class="product-box">
-                                        <div class="img-box">
-                                            <img src="assets/images/shop/cart-page-img-4.jpg" alt="">
-                                        </div>
-                                        <h3><a href="product-details.html">Nut Driver</a></h3>
-                                    </div>
-                                </td>
-                                <td>$10.99</td>
-                                <td>
-                                    <div class="quantity-box">
-                                        <button type="button" class="sub"><i
-                                                class="fa fa-minus"></i></button>
-                                        <input type="number" id="product-4" value="1" />
-                                        <button type="button" class="add"><i
-                                                class="fa fa-plus"></i></button>
-                                    </div>
-                                </td>
-                                <td>
-                                    $10.99
-                                </td>
-                                <td>
-                                    <div class="cross-icon">
-                                        <i class="fas fa-times"></i>
-                                    </div>
-                                </td>
-                            </tr>
-
+                            <tbody id="cart-items-body">
+                                <!-- JS will populate this -->
                             </tbody>
                         </table>
                     </div>
@@ -148,87 +29,21 @@ require_once __DIR__ . '/../backend/bootstrap.php';
             <div class="col-xl-4 col-lg-5">
                 <div class="cart-page__right">
                     <div class="cart-page__sidebar">
-                        <div class="cart-page__shipping">
-                            <h3 class="cart-page__shipping-title">Calculated Shipping</h3>
-                            <form action="#" class="cart-page__shipping-form">
-                                <div class="row">
-                                    <div class="col-xl-12">
-                                        <div class="cart-page__shipping-input-box">
-                                            <div class="select-box">
-                                                <select class="wide">
-                                                    <option data-display="Country">Country</option>
-                                                    <option value="1">Ban</option>
-                                                    <option value="2">Ind</option>
-                                                    <option value="3">Pak</option>
-                                                    <option value="3">USA</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-6 col-lg-6 col-md-6">
-                                        <div class="cart-page__shipping-input-box">
-                                            <div class="select-box">
-                                                <select class="wide">
-                                                    <option data-display="State/City">State/City</option>
-                                                    <option value="1">Ban</option>
-                                                    <option value="2">Ind</option>
-                                                    <option value="3">Pak</option>
-                                                    <option value="3">USA</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-6 col-lg-6 col-md-6">
-                                        <div class="cart-page__shipping-input-box">
-                                            <input type="text" placeholder="Zip Code">
-                                        </div>
-                                    </div>
-                                    <div class="cart-page__btn-box">
-                                        <button type="submit" class="thm-btn">
-                                            Update <span class="fas fa-arrow-right"></span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="cart-page__coupon-code">
-                            <h3 class="cart-page__coupon-code-title">Coupon Code</h3>
-                            <p class="cart-page__coupon-code-text">I must explain to you how all this mistaken
-                                idea of denouncing pleasure and praising pain was born</p>
-                            <form action="#" class="default-form cart-page__coupon-code-form">
-                                <input type="text" placeholder="Enter Coupon Code">
-                                <button class="thm-btn" type="submit">
-                                    Apply Coupon <span class="fas fa-arrow-right"></span>
-                                </button>
-                            </form>
-                        </div>
                         <div class="cart-page__cart-total">
                             <ul class="cart-total list-unstyled">
                                 <li>
-                                    <span>Cart Subtotal</span>
-                                    <span>$20.98 USD </span>
+                                    <span>Total Kendaraan</span>
+                                    <span id="cart-count">0</span>
                                 </li>
                                 <li>
-                                    <span>Shipping Cost</span>
-                                    <span>-$40.00 USD</span>
-                                </li>
-                                <li>
-                                    <span>Discount</span>
-                                    <span>$0.00 USD</span>
-                                </li>
-                                <li>
-                                    <span>Cart Total</span>
-                                    <span class="cart-total-amount">$20.98 USD</span>
+                                    <span>Total Bayar (Per Hari)</span>
+                                    <span class="cart-total-amount" id="cart-total-amount">Rp 0</span>
                                 </li>
                             </ul>
                             <div class="cart-page__buttons">
-                                <div class="cart-page__buttons-1">
-                                    <a class="thm-btn" href="checkout.html">Update <span
-                                            class="fas fa-arrow-right"></span> </a>
-                                </div>
                                 <div class="cart-page__buttons-2">
-                                    <a href="checkout.html" class="thm-btn">
-                                        Checkout <span class="fas fa-arrow-right"></span>
+                                    <a href="checkout.php" class="thm-btn w-100">
+                                        Lanjut ke Checkout <span class="fas fa-arrow-right"></span>
                                     </a>
                                 </div>
                             </div>
@@ -237,7 +52,77 @@ require_once __DIR__ . '/../backend/bootstrap.php';
                 </div>
             </div>
         </div>
+        <div class="row d-none" id="cart-empty">
+            <div class="col-12 text-center py-5">
+                <h3>Cart Anda masih kosong.</h3>
+                <a href="kendaraan.php" class="thm-btn mt-3">Lihat Kendaraan <span class="fas fa-arrow-right"></span></a>
+            </div>
+        </div>
     </div>
 </section>
 <!--End Cart Page-->
+
+<script>
+function renderCart() {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const body = document.getElementById('cart-items-body');
+    const container = document.getElementById('cart-container');
+    const emptyMsg = document.getElementById('cart-empty');
+    
+    if (cart.length === 0) {
+        container.classList.add('d-none');
+        emptyMsg.classList.remove('d-none');
+        return;
+    }
+
+    container.classList.remove('d-none');
+    emptyMsg.classList.add('d-none');
+    
+    body.innerHTML = '';
+    let total = 0;
+
+    cart.forEach((item, index) => {
+        total += parseFloat(item.harga);
+        const row = `
+            <tr>
+                <td>
+                    <div class="product-box">
+                        <div class="img-box">
+                            <img src="${item.foto ? '/uploads/' + item.foto : 'assets/images/shop/cart-page-img-1.jpg'}" alt="${item.nama}" style="width: 80px; height: 60px; object-fit: cover;">
+                        </div>
+                        <h3><a href="kendaraan-detail.php?id=${item.id}">${item.nama}</a></h3>
+                        <p class="fs-7 text-muted">${item.nama_tipe}</p>
+                    </div>
+                </td>
+                <td>Rp ${new Intl.NumberFormat('id-ID').format(item.harga)}</td>
+                <td>
+                    <div class="cross-icon" style="cursor:pointer;" onclick="removeFromCart(${index})">
+                        <i class="fas fa-times"></i> Hapus
+                    </div>
+                </td>
+            </tr>
+        `;
+        body.innerHTML += row;
+    });
+
+    document.getElementById('cart-count').innerText = cart.length;
+    document.getElementById('cart-total-amount').innerText = 'Rp ' + new Intl.NumberFormat('id-ID').format(total);
+}
+
+function removeFromCart(index) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    cart.splice(index, 1);
+    localStorage.setItem('cart', JSON.stringify(cart));
+    
+    // Update header count if function exists
+    if (typeof updateHeaderCartCount === 'function') {
+        updateHeaderCartCount();
+    }
+    
+    renderCart();
+}
+
+document.addEventListener('DOMContentLoaded', renderCart);
+</script>
+
 <?= layout('footer') ?>

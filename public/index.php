@@ -1,8 +1,19 @@
 <?php
 require_once __DIR__ . '/../backend/bootstrap.php';
+
+$db = database();
+// Fetch latest 6 active vehicles for the popular cars section
+$sql = "SELECT k.*, t.nama_tipe, t.kapasitas 
+        FROM kendaraan k 
+        LEFT JOIN tipe_kendaraan t ON k.id_tipe = t.id_tipe 
+        WHERE k.status != 'nonaktif' 
+        ORDER BY k.created_at DESC 
+        LIMIT 6";
+$stmt = $db->query($sql);
+$popular_cars = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
-<?= layout('header') ?>
+<?= layout('header', ['title' => 'Beranda']) ?>
 
     <!-- Banner One Start -->
     <section class="banner-one">
@@ -16,16 +27,12 @@ require_once __DIR__ . '/../backend/bootstrap.php';
         <div class="container">
             <div class="banner-one__inner">
                 <div class="banner-one__content">
-                    <p class="banner-one__sub-title">100% Trusted car rental platform in the World</p>
-                    <h2 class="banner-one__title">Find Your Best Dream <br> <span> Car
-                                for</span> <span class="typed-effect" id="type-1" data-strings="Rental, Booking"></span>
+                    <p class="banner-one__sub-title">Platform Sewa Mobil Terpercaya & Profesional</p>
+                    <h2 class="banner-one__title">Solusi Transportasi Terbaik <br> <span> Untuk</span> <span class="typed-effect" id="type-1" data-strings="Perjalanan, Bisnis, Liburan"></span>
                     </h2>
-                    <p class="banner-one__text">Lorem ipsum is simply ipun txns mane so dummy text of free
-                        available in market <br> the printing and typesetting industry has been the industry's
-                        standard dummy <br> text ever. Open multipy a green form lesser their from in made herb
-                        multiply.</p>
+                    <p class="banner-one__text">Nikmati kemudahan menyewa kendaraan dengan layanan prima dan armada terbaru. <br> Kami menyediakan berbagai pilihan kendaraan untuk mendukung mobilitas Anda <br> dengan proses yang cepat, aman, dan harga yang kompetitif.</p>
                     <div class="banner-one__btn-box">
-                        <a href="about.html" class="thm-btn">Read More<span class="fas fa-arrow-right"></span></a>
+                        <a href="kendaraan.php" class="thm-btn">Cari Kendaraan<span class="fas fa-arrow-right"></span></a>
                     </div>
                 </div>
                 <div class="banner-one__img-one" data-aos="slide-left" data-aos-duration="2000">
@@ -36,367 +43,6 @@ require_once __DIR__ . '/../backend/bootstrap.php';
     </section>
     <!--Banner One End -->
 
-    <!--Search Car Start -->
-    <section class="search-car">
-        <div class="search-car__shape-1"></div>
-        <div class="search-car__shape-2"></div>
-        <div class="container">
-            <div class="search-car__inner">
-                <div class="search-car__tab-box tabs-box">
-                    <ul class="tab-buttons clearfix list-unstyled">
-                        <li data-tab="#usedcar" class="tab-btn active-btn"><span>Used car</span></li>
-                        <li data-tab="#newcars" class="tab-btn"><span>New Cars</span></li>
-                        <li data-tab="#sportscars" class="tab-btn"><span>Sports Cars</span></li>
-                        <li data-tab="#luxurycars" class="tab-btn"><span>Luxury Sedans</span></li>
-                    </ul>
-                    <div class="tabs-content">
-                        <!--tab-->
-                        <div class="tab active-tab" id="usedcar">
-                            <div class="tabs-content__inner">
-                                <form class="contact-form-validated search-car__form"
-                                      action="https://dreamlayout.mnsithub.com/html/gorent/main-html/assets/inc/sendemail.php"
-                                      method="post" novalidate="novalidate">
-                                    <div class="row">
-                                        <div class="col-xl-4 col-lg-4 col-md-4">
-                                            <div class="search-car__input-box">
-                                                <p class="search-car__input-title"><span class="icon-pin-2"></span>
-                                                    Pickup</p>
-                                                <div class="select-box">
-                                                    <select class="selectmenu wide">
-                                                        <option selected="selected">Enter a Location</option>
-                                                        <option>Enter a Location 01</option>
-                                                        <option>Enter a Location 02</option>
-                                                        <option>Enter a Location 03</option>
-                                                        <option>Enter a Location 04</option>
-                                                        <option>Enter a Location 05</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-4 col-lg-4 col-md-4">
-                                            <div class="search-car__input-box">
-                                                <p class="search-car__input-title"> <span
-                                                            class="icon-date"></span>Pickup
-                                                    Date</p>
-                                                <input type="text" placeholder="mm/dd/yyy" name="date"
-                                                       id="datepicker">
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-4 col-lg-4 col-md-4">
-                                            <div class="search-car__input-box">
-                                                <p class="search-car__input-title"> <span
-                                                            class="icon-clock"></span>Pickup
-                                                    Time</p>
-                                                <input type="text" name="time" placeholder="Chose A Time">
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-4 col-lg-4 col-md-4">
-                                            <div class="search-car__input-box">
-                                                <p class="search-car__input-title"><span class="icon-pin-2"></span>
-                                                    Drop of</p>
-                                                <div class="select-box">
-                                                    <select class="selectmenu wide">
-                                                        <option selected="selected">Enter a Location</option>
-                                                        <option>Enter a Location 01</option>
-                                                        <option>Enter a Location 02</option>
-                                                        <option>Enter a Location 03</option>
-                                                        <option>Enter a Location 04</option>
-                                                        <option>Enter a Location 05</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-4 col-lg-4 col-md-4">
-                                            <div class="search-car__input-box">
-                                                <p class="search-car__input-title"> <span
-                                                            class="icon-date"></span>Drop of
-                                                    Date</p>
-                                                <input type="text" placeholder="mm/dd/yyy" name="date"
-                                                       id="datepicker-2">
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-4 col-lg-4 col-md-4">
-                                            <div class="search-car__input-box">
-                                                <p class="search-car__input-title"> <span
-                                                            class="icon-clock"></span>Drop of
-                                                    Time</p>
-                                                <input type="text" name="time" placeholder="Chose A Time">
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-12">
-                                            <div class="search-car__btn-box">
-                                                <button type="submit" class="thm-btn">Find a Vehicle
-                                                    <span class="fas fa-search"></span></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                                <div class="result"></div>
-                            </div>
-                        </div>
-                        <!--tab-->
-                        <!--tab-->
-                        <div class="tab" id="newcars">
-                            <div class="tabs-content__inner">
-                                <form class="contact-form-validated search-car__form"
-                                      action="https://dreamlayout.mnsithub.com/html/gorent/main-html/assets/inc/sendemail.php"
-                                      method="post" novalidate="novalidate">
-                                    <div class="row">
-                                        <div class="col-xl-4 col-lg-4 col-md-4">
-                                            <div class="search-car__input-box">
-                                                <p class="search-car__input-title"><span class="icon-pin-2"></span>
-                                                    Pickup</p>
-                                                <div class="select-box">
-                                                    <select class="selectmenu wide">
-                                                        <option selected="selected">Enter a Location</option>
-                                                        <option>Enter a Location 01</option>
-                                                        <option>Enter a Location 02</option>
-                                                        <option>Enter a Location 03</option>
-                                                        <option>Enter a Location 04</option>
-                                                        <option>Enter a Location 05</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-4 col-lg-4 col-md-4">
-                                            <div class="search-car__input-box">
-                                                <p class="search-car__input-title"> <span
-                                                            class="icon-date"></span>Pickup
-                                                    Date</p>
-                                                <input type="text" placeholder="mm/dd/yyy" name="date"
-                                                       id="datepicker-3">
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-4 col-lg-4 col-md-4">
-                                            <div class="search-car__input-box">
-                                                <p class="search-car__input-title"> <span
-                                                            class="icon-clock"></span>Pickup
-                                                    Time</p>
-                                                <input type="text" name="time" placeholder="Chose A Time">
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-4 col-lg-4 col-md-4">
-                                            <div class="search-car__input-box">
-                                                <p class="search-car__input-title"><span class="icon-pin-2"></span>
-                                                    Drop of</p>
-                                                <div class="select-box">
-                                                    <select class="selectmenu wide">
-                                                        <option selected="selected">Enter a Location</option>
-                                                        <option>Enter a Location 01</option>
-                                                        <option>Enter a Location 02</option>
-                                                        <option>Enter a Location 03</option>
-                                                        <option>Enter a Location 04</option>
-                                                        <option>Enter a Location 05</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-4 col-lg-4 col-md-4">
-                                            <div class="search-car__input-box">
-                                                <p class="search-car__input-title"> <span
-                                                            class="icon-date"></span>Drop of
-                                                    Date</p>
-                                                <input type="text" placeholder="mm/dd/yyy" name="date"
-                                                       id="datepicker-4">
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-4 col-lg-4 col-md-4">
-                                            <div class="search-car__input-box">
-                                                <p class="search-car__input-title"> <span
-                                                            class="icon-clock"></span>Drop of
-                                                    Time</p>
-                                                <input type="text" name="time" placeholder="Chose A Time">
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-12">
-                                            <div class="search-car__btn-box">
-                                                <button type="submit" class="thm-btn">Find a Vehicle
-                                                    <span class="fas fa-search"></span></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                                <div class="result"></div>
-                            </div>
-                        </div>
-                        <!--tab-->
-                        <!--tab-->
-                        <div class="tab" id="sportscars">
-                            <div class="tabs-content__inner">
-                                <form class="contact-form-validated search-car__form"
-                                      action="https://dreamlayout.mnsithub.com/html/gorent/main-html/assets/inc/sendemail.php"
-                                      method="post" novalidate="novalidate">
-                                    <div class="row">
-                                        <div class="col-xl-4 col-lg-4 col-md-4">
-                                            <div class="search-car__input-box">
-                                                <p class="search-car__input-title"><span class="icon-pin-2"></span>
-                                                    Pickup</p>
-                                                <div class="select-box">
-                                                    <select class="selectmenu wide">
-                                                        <option selected="selected">Enter a Location</option>
-                                                        <option>Enter a Location 01</option>
-                                                        <option>Enter a Location 02</option>
-                                                        <option>Enter a Location 03</option>
-                                                        <option>Enter a Location 04</option>
-                                                        <option>Enter a Location 05</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-4 col-lg-4 col-md-4">
-                                            <div class="search-car__input-box">
-                                                <p class="search-car__input-title"> <span
-                                                            class="icon-date"></span>Pickup
-                                                    Date</p>
-                                                <input type="text" placeholder="mm/dd/yyy" name="date"
-                                                       id="datepicker-5">
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-4 col-lg-4 col-md-4">
-                                            <div class="search-car__input-box">
-                                                <p class="search-car__input-title"> <span
-                                                            class="icon-clock"></span>Pickup
-                                                    Time</p>
-                                                <input type="text" name="time" placeholder="Chose A Time">
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-4 col-lg-4 col-md-4">
-                                            <div class="search-car__input-box">
-                                                <p class="search-car__input-title"><span class="icon-pin-2"></span>
-                                                    Drop of</p>
-                                                <div class="select-box">
-                                                    <select class="selectmenu wide">
-                                                        <option selected="selected">Enter a Location</option>
-                                                        <option>Enter a Location 01</option>
-                                                        <option>Enter a Location 02</option>
-                                                        <option>Enter a Location 03</option>
-                                                        <option>Enter a Location 04</option>
-                                                        <option>Enter a Location 05</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-4 col-lg-4 col-md-4">
-                                            <div class="search-car__input-box">
-                                                <p class="search-car__input-title"> <span
-                                                            class="icon-date"></span>Drop of
-                                                    Date</p>
-                                                <input type="text" placeholder="mm/dd/yyy" name="date"
-                                                       id="datepicker-6">
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-4 col-lg-4 col-md-4">
-                                            <div class="search-car__input-box">
-                                                <p class="search-car__input-title"> <span
-                                                            class="icon-clock"></span>Drop of
-                                                    Time</p>
-                                                <input type="text" name="time" placeholder="Chose A Time">
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-12">
-                                            <div class="search-car__btn-box">
-                                                <button type="submit" class="thm-btn">Find a Vehicle
-                                                    <span class="fas fa-search"></span></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                                <div class="result"></div>
-                            </div>
-                        </div>
-                        <!--tab-->
-                        <!--tab-->
-                        <div class="tab" id="luxurycars">
-                            <div class="tabs-content__inner">
-                                <form class="contact-form-validated search-car__form"
-                                      action="https://dreamlayout.mnsithub.com/html/gorent/main-html/assets/inc/sendemail.php"
-                                      method="post" novalidate="novalidate">
-                                    <div class="row">
-                                        <div class="col-xl-4 col-lg-4 col-md-4">
-                                            <div class="search-car__input-box">
-                                                <p class="search-car__input-title"><span class="icon-pin-2"></span>
-                                                    Pickup</p>
-                                                <div class="select-box">
-                                                    <select class="selectmenu wide">
-                                                        <option selected="selected">Enter a Location</option>
-                                                        <option>Enter a Location 01</option>
-                                                        <option>Enter a Location 02</option>
-                                                        <option>Enter a Location 03</option>
-                                                        <option>Enter a Location 04</option>
-                                                        <option>Enter a Location 05</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-4 col-lg-4 col-md-4">
-                                            <div class="search-car__input-box">
-                                                <p class="search-car__input-title"> <span
-                                                            class="icon-date"></span>Pickup
-                                                    Date</p>
-                                                <input type="text" placeholder="mm/dd/yyy" name="date"
-                                                       id="datepicker-7">
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-4 col-lg-4 col-md-4">
-                                            <div class="search-car__input-box">
-                                                <p class="search-car__input-title"> <span
-                                                            class="icon-clock"></span>Pickup
-                                                    Time</p>
-                                                <input type="text" name="time" placeholder="Chose A Time">
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-4 col-lg-4 col-md-4">
-                                            <div class="search-car__input-box">
-                                                <p class="search-car__input-title"><span class="icon-pin-2"></span>
-                                                    Drop of</p>
-                                                <div class="select-box">
-                                                    <select class="selectmenu wide">
-                                                        <option selected="selected">Enter a Location</option>
-                                                        <option>Enter a Location 01</option>
-                                                        <option>Enter a Location 02</option>
-                                                        <option>Enter a Location 03</option>
-                                                        <option>Enter a Location 04</option>
-                                                        <option>Enter a Location 05</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-4 col-lg-4 col-md-4">
-                                            <div class="search-car__input-box">
-                                                <p class="search-car__input-title"> <span
-                                                            class="icon-date"></span>Drop of
-                                                    Date</p>
-                                                <input type="text" placeholder="mm/dd/yyy" name="date"
-                                                       id="datepicker-8">
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-4 col-lg-4 col-md-4">
-                                            <div class="search-car__input-box">
-                                                <p class="search-car__input-title"> <span
-                                                            class="icon-clock"></span>Drop of
-                                                    Time</p>
-                                                <input type="text" name="time" placeholder="Chose A Time">
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-12">
-                                            <div class="search-car__btn-box">
-                                                <button type="submit" class="thm-btn">Find a Vehicle
-                                                    <span class="fas fa-search"></span></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                                <div class="result"></div>
-                            </div>
-                        </div>
-                        <!--tab-->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!--Search Car End -->
-
     <!-- Process One Start -->
     <section class="process-one process-three">
         <div class="container">
@@ -405,9 +51,9 @@ require_once __DIR__ . '/../backend/bootstrap.php';
                     <div class="section-title__tagline-shape">
                         <img src="assets/images/shapes/section-title-tagline-shape-1.png" alt="">
                     </div>
-                    <span class="section-title__tagline">Steps</span>
+                    <span class="section-title__tagline">Prosedur</span>
                 </div>
-                <h2 class="section-title__title title-animation">Car Rental Process</h2>
+                <h2 class="section-title__title title-animation">Proses Sewa Mudah & Cepat</h2>
             </div>
             <div class="row">
                 <!-- Process One Single Start -->
@@ -424,9 +70,8 @@ require_once __DIR__ . '/../backend/bootstrap.php';
                             </div>
                             <div class="process-one__count"></div>
                         </div>
-                        <h3 class="process-one__title">Choose A Car</h3>
-                        <p class="process-one__text">Open multipy a green form lesser their from in made herb
-                            multiply</p>
+                        <h3 class="process-one__title">Pilih Armada</h3>
+                        <p class="process-one__text">Pilih kendaraan yang sesuai dengan kebutuhan perjalanan Anda dari katalog kami.</p>
                     </div>
                 </div>
                 <!-- Process One Single End -->
@@ -444,9 +89,8 @@ require_once __DIR__ . '/../backend/bootstrap.php';
                             </div>
                             <div class="process-one__count"></div>
                         </div>
-                        <h3 class="process-one__title">Come In Contact</h3>
-                        <p class="process-one__text">Open multipy a green form lesser their from in made herb
-                            multiply</p>
+                        <h3 class="process-one__title">Pesan & Bayar</h3>
+                        <p class="process-one__text">Lakukan pemesanan online dan selesaikan pembayaran dengan metode QRIS yang praktis.</p>
                     </div>
                 </div>
                 <!-- Process One Single End -->
@@ -464,9 +108,8 @@ require_once __DIR__ . '/../backend/bootstrap.php';
                             </div>
                             <div class="process-one__count"></div>
                         </div>
-                        <h3 class="process-one__title">Pick-Up Locations</h3>
-                        <p class="process-one__text">Open multipy a green form lesser their from in made herb
-                            multiply</p>
+                        <h3 class="process-one__title">Konfirmasi Admin</h3>
+                        <p class="process-one__text">Tim kami akan memverifikasi pesanan Anda dan menyiapkan kendaraan tepat waktu.</p>
                     </div>
                 </div>
                 <!-- Process One Single End -->
@@ -484,9 +127,8 @@ require_once __DIR__ . '/../backend/bootstrap.php';
                             </div>
                             <div class="process-one__count"></div>
                         </div>
-                        <h3 class="process-one__title">Enjoy Driving</h3>
-                        <p class="process-one__text">Open multipy a green form lesser their from in made herb
-                            multiply</p>
+                        <h3 class="process-one__title">Mulai Perjalanan</h3>
+                        <p class="process-one__text">Ambil kendaraan atau tunggu pengantaran, dan nikmati perjalanan Anda dengan tenang.</p>
                     </div>
                 </div>
                 <!-- Process One Single End -->
@@ -503,23 +145,23 @@ require_once __DIR__ . '/../backend/bootstrap.php';
                     <div class="section-title__tagline-shape">
                         <img src="assets/images/shapes/section-title-tagline-shape-1.png" alt="">
                     </div>
-                    <span class="section-title__tagline">Checkout our new cars</span>
+                    <span class="section-title__tagline">Katalog Utama</span>
                 </div>
-                <h2 class="section-title__title title-animation">Explore Most Popular Cars</h2>
+                <h2 class="section-title__title title-animation">Pilihan Armada Terpopuler</h2>
             </div>
             <div class="listing-three__carousel owl-carousel owl-theme">
+                <?php foreach ($popular_cars as $kendaraan): ?>
                 <!-- Listing One Single Start -->
                 <div class="item">
                     <div class="listing-three__single">
                         <div class="listing-three__img">
-                            <img src="assets/images/listing/listing-3-1.jpg" alt="">
+                            <img src="<?= $kendaraan['foto_kendaraan'] ? '/uploads/' . $kendaraan['foto_kendaraan'] : 'assets/images/listing/listing-3-1.jpg' ?>" alt="<?= htmlspecialchars($kendaraan['nama_kendaraan']) ?>" style="height: 250px; object-fit: cover;">
                             <div class="listing-three__brand-name">
-                                <p>Acura</p>
+                                <p><?= htmlspecialchars($kendaraan['nama_tipe']) ?></p>
                             </div>
                         </div>
                         <div class="listing-three__content">
-                            <h3 class="listing-three__title"><a href="listing-single.html">Acura
-                                    Sport Version</a></h3>
+                            <h3 class="listing-three__title"><a href="kendaraan-detail.php?id=<?= $kendaraan['id_kendaraan'] ?>"><?= htmlspecialchars($kendaraan['nama_kendaraan']) ?></a></h3>
                             <div class="listing-three__meta-box-info">
                                 <ul class="list-unstyled listing-three__meta">
                                     <li>
@@ -527,15 +169,15 @@ require_once __DIR__ . '/../backend/bootstrap.php';
                                             <span class="icon-manual"></span>
                                         </div>
                                         <div class="text">
-                                            <p>Manual</p>
+                                            <p><?= $kendaraan['is_manual'] ? 'Manual' : 'Automatic' ?></p>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="icon">
-                                            <span class="icon-mileage"></span>
+                                            <span class="icon-test-drive"></span>
                                         </div>
                                         <div class="text">
-                                            <p>25 KM</p>
+                                            <p><?= $kendaraan['tahun'] ?></p>
                                         </div>
                                     </li>
                                     <li>
@@ -543,25 +185,17 @@ require_once __DIR__ . '/../backend/bootstrap.php';
                                             <span class="icon-fuel-type"></span>
                                         </div>
                                         <div class="text">
-                                            <p>Diesel</p>
+                                            <p><?= ucfirst($kendaraan['jenis_bahan_bakar']) ?></p>
                                         </div>
                                     </li>
                                 </ul>
                                 <ul class="list-unstyled listing-three__meta listing-three__meta--two">
                                     <li>
                                         <div class="icon">
-                                            <span class="icon-test-drive"></span>
+                                            <span class="icon-paint"></span>
                                         </div>
                                         <div class="text">
-                                            <p>Basic</p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="icon">
-                                            <span class="icon-avatar"></span>
-                                        </div>
-                                        <div class="text">
-                                            <p>Age 25</p>
+                                            <p><?= htmlspecialchars($kendaraan['warna']) ?></p>
                                         </div>
                                     </li>
                                     <li>
@@ -569,15 +203,23 @@ require_once __DIR__ . '/../backend/bootstrap.php';
                                             <span class="icon-in-person"></span>
                                         </div>
                                         <div class="text">
-                                            <p>5 Persons</p>
+                                            <p><?= $kendaraan['kapasitas_penumpang'] ?> Persons</p>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="icon">
+                                            <span class="icon-shield"></span>
+                                        </div>
+                                        <div class="text">
+                                            <p><?= ucfirst($kendaraan['status']) ?></p>
                                         </div>
                                     </li>
                                 </ul>
                             </div>
                             <div class="listing-three__car-rent-and-btn-box">
-                                <p class="listing-three__car-rent"><span>$100/</span> Day</p>
+                                <p class="listing-three__car-rent"><span>Rp <?= number_format($kendaraan['harga_perhari'], 0, ',', '.') ?>/</span> Hari</p>
                                 <div class="listing-three__btn-box">
-                                    <a href="listing-single.html" class="listing-three__btn"><span
+                                    <a href="kendaraan-detail.php?id=<?= $kendaraan['id_kendaraan'] ?>" class="listing-three__btn"><span
                                                 class="icon-right-arrow-1"></span></a>
                                 </div>
                             </div>
@@ -585,391 +227,7 @@ require_once __DIR__ . '/../backend/bootstrap.php';
                     </div>
                 </div>
                 <!-- Listing One Single End -->
-                <!-- Listing One Single Start -->
-                <div class="item">
-                    <div class="listing-three__single">
-                        <div class="listing-three__img">
-                            <img src="assets/images/listing/listing-3-2.jpg" alt="">
-                            <div class="listing-three__brand-name">
-                                <p>Acura</p>
-                            </div>
-                        </div>
-                        <div class="listing-three__content">
-                            <h3 class="listing-three__title"><a href="listing-single.html">Kia Soul
-                                    2025</a></h3>
-                            <div class="listing-three__meta-box-info">
-                                <ul class="list-unstyled listing-three__meta">
-                                    <li>
-                                        <div class="icon">
-                                            <span class="icon-manual"></span>
-                                        </div>
-                                        <div class="text">
-                                            <p>Manual</p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="icon">
-                                            <span class="icon-mileage"></span>
-                                        </div>
-                                        <div class="text">
-                                            <p>25 KM</p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="icon">
-                                            <span class="icon-fuel-type"></span>
-                                        </div>
-                                        <div class="text">
-                                            <p>Diesel</p>
-                                        </div>
-                                    </li>
-                                </ul>
-                                <ul class="list-unstyled listing-three__meta listing-three__meta--two">
-                                    <li>
-                                        <div class="icon">
-                                            <span class="icon-test-drive"></span>
-                                        </div>
-                                        <div class="text">
-                                            <p>Basic</p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="icon">
-                                            <span class="icon-avatar"></span>
-                                        </div>
-                                        <div class="text">
-                                            <p>Age 25</p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="icon">
-                                            <span class="icon-in-person"></span>
-                                        </div>
-                                        <div class="text">
-                                            <p>5 Persons</p>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="listing-three__car-rent-and-btn-box">
-                                <p class="listing-three__car-rent"><span>$100/</span> Day</p>
-                                <div class="listing-three__btn-box">
-                                    <a href="listing-single.html" class="listing-three__btn"><span
-                                                class="icon-right-arrow-1"></span></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Listing One Single End -->
-                <!-- Listing One Single Start -->
-                <div class="item">
-                    <div class="listing-three__single">
-                        <div class="listing-three__img">
-                            <img src="assets/images/listing/listing-3-3.jpg" alt="">
-                            <div class="listing-three__brand-name">
-                                <p>Acura</p>
-                            </div>
-                        </div>
-                        <div class="listing-three__content">
-                            <h3 class="listing-three__title"><a href="listing-single.html">Audi A3
-                                    2025 New</a></h3>
-                            <div class="listing-three__meta-box-info">
-                                <ul class="list-unstyled listing-three__meta">
-                                    <li>
-                                        <div class="icon">
-                                            <span class="icon-manual"></span>
-                                        </div>
-                                        <div class="text">
-                                            <p>Manual</p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="icon">
-                                            <span class="icon-mileage"></span>
-                                        </div>
-                                        <div class="text">
-                                            <p>25 KM</p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="icon">
-                                            <span class="icon-fuel-type"></span>
-                                        </div>
-                                        <div class="text">
-                                            <p>Diesel</p>
-                                        </div>
-                                    </li>
-                                </ul>
-                                <ul class="list-unstyled listing-three__meta listing-three__meta--two">
-                                    <li>
-                                        <div class="icon">
-                                            <span class="icon-test-drive"></span>
-                                        </div>
-                                        <div class="text">
-                                            <p>Basic</p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="icon">
-                                            <span class="icon-avatar"></span>
-                                        </div>
-                                        <div class="text">
-                                            <p>Age 25</p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="icon">
-                                            <span class="icon-in-person"></span>
-                                        </div>
-                                        <div class="text">
-                                            <p>5 Persons</p>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="listing-three__car-rent-and-btn-box">
-                                <p class="listing-three__car-rent"><span>$100/</span> Day</p>
-                                <div class="listing-three__btn-box">
-                                    <a href="listing-single.html" class="listing-three__btn"><span
-                                                class="icon-right-arrow-1"></span></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Listing One Single End -->
-                <!-- Listing One Single Start -->
-                <div class="item">
-                    <div class="listing-three__single">
-                        <div class="listing-three__img">
-                            <img src="assets/images/listing/listing-3-4.jpg" alt="">
-                            <div class="listing-three__brand-name">
-                                <p>Acura</p>
-                            </div>
-                        </div>
-                        <div class="listing-three__content">
-                            <h3 class="listing-three__title"><a href="listing-single.html">Ferrari
-                                    458 MM Speciale</a></h3>
-                            <div class="listing-three__meta-box-info">
-                                <ul class="list-unstyled listing-three__meta">
-                                    <li>
-                                        <div class="icon">
-                                            <span class="icon-manual"></span>
-                                        </div>
-                                        <div class="text">
-                                            <p>Manual</p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="icon">
-                                            <span class="icon-mileage"></span>
-                                        </div>
-                                        <div class="text">
-                                            <p>25 KM</p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="icon">
-                                            <span class="icon-fuel-type"></span>
-                                        </div>
-                                        <div class="text">
-                                            <p>Diesel</p>
-                                        </div>
-                                    </li>
-                                </ul>
-                                <ul class="list-unstyled listing-three__meta listing-three__meta--two">
-                                    <li>
-                                        <div class="icon">
-                                            <span class="icon-test-drive"></span>
-                                        </div>
-                                        <div class="text">
-                                            <p>Basic</p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="icon">
-                                            <span class="icon-avatar"></span>
-                                        </div>
-                                        <div class="text">
-                                            <p>Age 25</p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="icon">
-                                            <span class="icon-in-person"></span>
-                                        </div>
-                                        <div class="text">
-                                            <p>5 Persons</p>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="listing-three__car-rent-and-btn-box">
-                                <p class="listing-three__car-rent"><span>$100/</span> Day</p>
-                                <div class="listing-three__btn-box">
-                                    <a href="listing-single.html" class="listing-three__btn"><span
-                                                class="icon-right-arrow-1"></span></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Listing One Single End -->
-                <!-- Listing One Single Start -->
-                <div class="item">
-                    <div class="listing-three__single">
-                        <div class="listing-three__img">
-                            <img src="assets/images/listing/listing-3-5.jpg" alt="">
-                            <div class="listing-three__brand-name">
-                                <p>Acura</p>
-                            </div>
-                        </div>
-                        <div class="listing-three__content">
-                            <h3 class="listing-three__title"><a href="listing-single.html">Audi Sport
-                                    Version</a></h3>
-                            <div class="listing-three__meta-box-info">
-                                <ul class="list-unstyled listing-three__meta">
-                                    <li>
-                                        <div class="icon">
-                                            <span class="icon-manual"></span>
-                                        </div>
-                                        <div class="text">
-                                            <p>Manual</p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="icon">
-                                            <span class="icon-mileage"></span>
-                                        </div>
-                                        <div class="text">
-                                            <p>25 KM</p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="icon">
-                                            <span class="icon-fuel-type"></span>
-                                        </div>
-                                        <div class="text">
-                                            <p>Diesel</p>
-                                        </div>
-                                    </li>
-                                </ul>
-                                <ul class="list-unstyled listing-three__meta listing-three__meta--two">
-                                    <li>
-                                        <div class="icon">
-                                            <span class="icon-test-drive"></span>
-                                        </div>
-                                        <div class="text">
-                                            <p>Basic</p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="icon">
-                                            <span class="icon-avatar"></span>
-                                        </div>
-                                        <div class="text">
-                                            <p>Age 25</p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="icon">
-                                            <span class="icon-in-person"></span>
-                                        </div>
-                                        <div class="text">
-                                            <p>5 Persons</p>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="listing-three__car-rent-and-btn-box">
-                                <p class="listing-three__car-rent"><span>$100/</span> Day</p>
-                                <div class="listing-three__btn-box">
-                                    <a href="listing-single.html" class="listing-three__btn"><span
-                                                class="icon-right-arrow-1"></span></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Listing One Single End -->
-                <!-- Listing One Single Start -->
-                <div class="item">
-                    <div class="listing-three__single">
-                        <div class="listing-three__img">
-                            <img src="assets/images/listing/listing-1-6.jpg" alt="">
-                            <div class="listing-three__brand-name">
-                                <p>Acura</p>
-                            </div>
-                        </div>
-                        <div class="listing-three__content">
-                            <h3 class="listing-three__title"><a href="listing-single.html">Toyota
-                                    Tacoma 4WD</a></h3>
-                            <div class="listing-three__meta-box-info">
-                                <ul class="list-unstyled listing-three__meta">
-                                    <li>
-                                        <div class="icon">
-                                            <span class="icon-manual"></span>
-                                        </div>
-                                        <div class="text">
-                                            <p>Manual</p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="icon">
-                                            <span class="icon-mileage"></span>
-                                        </div>
-                                        <div class="text">
-                                            <p>25 KM</p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="icon">
-                                            <span class="icon-fuel-type"></span>
-                                        </div>
-                                        <div class="text">
-                                            <p>Diesel</p>
-                                        </div>
-                                    </li>
-                                </ul>
-                                <ul class="list-unstyled listing-three__meta listing-three__meta--two">
-                                    <li>
-                                        <div class="icon">
-                                            <span class="icon-test-drive"></span>
-                                        </div>
-                                        <div class="text">
-                                            <p>Basic</p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="icon">
-                                            <span class="icon-avatar"></span>
-                                        </div>
-                                        <div class="text">
-                                            <p>Age 25</p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="icon">
-                                            <span class="icon-in-person"></span>
-                                        </div>
-                                        <div class="text">
-                                            <p>5 Persons</p>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="listing-three__car-rent-and-btn-box">
-                                <p class="listing-three__car-rent"><span>$100/</span> Day</p>
-                                <div class="listing-three__btn-box">
-                                    <a href="listing-single.html" class="listing-three__btn"><span
-                                                class="icon-right-arrow-1"></span></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Listing One Single End -->
+                <?php endforeach; ?>
             </div>
         </div>
     </section>
@@ -1006,11 +264,10 @@ require_once __DIR__ . '/../backend/bootstrap.php';
                             <div class="feature-one__inner-single-bg"
                                  style="background-image: url(assets/images/backgrounds/feature-one-bg-1.jpg);">
                             </div>
-                            <h3 class="feature-one__inner-title">Are You Looking <br>For a Car ?</h3>
-                            <p class="feature-one__inner-text">Lorem ipsum is simply ipun txns mane so dummy text of
-                                free available in market the printing and typesetting industry</p>
+                            <h3 class="feature-one__inner-title">Butuh Kendaraan <br>Untuk Perjalanan Anda?</h3>
+                            <p class="feature-one__inner-text">Temukan armada terbaik yang sesuai dengan gaya dan kebutuhan anggaran Anda hanya dalam beberapa klik.</p>
                             <div class="feature-one__inner-btn-box">
-                                <a href="contact.html" class="thm-btn">Get Started</a>
+                                <a href="kendaraan.php" class="thm-btn">Lihat Semua</a>
                             </div>
                         </div>
                     </div>
@@ -1020,11 +277,10 @@ require_once __DIR__ . '/../backend/bootstrap.php';
                             <div class="feature-one__inner-single-bg"
                                  style="background-image: url(assets/images/backgrounds/feature-one-bg-2.jpg);">
                             </div>
-                            <h3 class="feature-one__inner-title">Do You Want to <br> Rent a Car ?</h3>
-                            <p class="feature-one__inner-text">Lorem ipsum is simply ipun txns mane so dummy text of
-                                free available in market the printing and typesetting industry</p>
+                            <h3 class="feature-one__inner-title">Layanan Sewa Mobil <br> Lepas Kunci?</h3>
+                            <p class="feature-one__inner-text">Nikmati kebebasan berkendara dengan layanan lepas kunci kami yang fleksibel dan terjangkau.</p>
                             <div class="feature-one__inner-btn-box">
-                                <a href="car-list-v-1.html" class="thm-btn">Rent Now</a>
+                                <a href="kendaraan.php" class="thm-btn">Pesan Sekarang</a>
                             </div>
                         </div>
                     </div>

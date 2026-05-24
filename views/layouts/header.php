@@ -5,11 +5,11 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title> Home Three || Gorent || Gorent HTML 5 Template </title>
+    <title> <?= isset($title) ? 'Go Rent - ' . $title : 'Go Rent' ?> </title>
     <link rel="apple-touch-icon" sizes="180x180" href="assets/images/favicons/apple-touch-icon.png"/>
     <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicons/favicon-32x32.png"/>
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicons/favicon-16x16.png"/>
-    <meta name="description" content="Gorent HTML 5 Template "/>
+    <meta name="description" content="Gorent HTML 5  Template "/>
 
     <link rel="manifest" href="assets/images/favicons/site.webmanifest"/>
     <!-- fonts -->
@@ -72,7 +72,6 @@
     <link rel="stylesheet" href="assets/css/module-css/page-header.css" />
     <link rel="stylesheet" href="assets/css/module-css/error.css" />
     <link rel="stylesheet" href="assets/css/module-css/shop.css" />
-
     <!-- template styles -->
     <link rel="stylesheet" href="assets/css/style.css"/>
     <link rel="stylesheet" href="assets/css/responsive.css"/>
@@ -105,15 +104,30 @@
                             <a href="#" class="mobile-nav__toggler"><i class="fa fa-bars"></i></a>
                             <?= layout('nav') ?>
                         </div>
-                        <?php if (auth()->check()) : ?>
+                        <?php if (auth()->check() && auth()->isPengguna()) : ?>
                             <div class="main-menu-three__search-cart-box">
                                 <div class="main-menu-three__cart-box">
                                     <a href="cart.php" class="main-menu-three__cart">
                                         <span class="far fa-shopping-cart"></span>
-                                        <span class="main-menu-three__cart-count">02</span>
+                                        <span class="main-menu-three__cart-count js-cart-count">0</span>
                                     </a>
                                 </div>
                             </div>
+                            <script>
+                                function updateHeaderCartCount() {
+                                    try {
+                                        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+                                        const countElements = document.querySelectorAll('.js-cart-count');
+                                        countElements.forEach(el => {
+                                            el.innerText = cart.length;
+                                        });
+                                    } catch (e) {
+                                        console.error('Error updating cart count:', e);
+                                    }
+                                }
+                                document.addEventListener('DOMContentLoaded', updateHeaderCartCount);
+                                window.addEventListener('storage', updateHeaderCartCount);
+                            </script>
                         <?php endif; ?>
                     </div>
                 </div>
