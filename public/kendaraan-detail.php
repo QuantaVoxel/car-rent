@@ -22,171 +22,87 @@ if (!$kendaraan) {
     header('Location: kendaraan.php');
     exit;
 }
-
 ?>
 
 <?= layout('header', ['title' => 'Detail Kendaraan']) ?>
-<!--Listing Single Start-->
-<section class="listing-single">
+
+<section class="listing-single py-5">
     <div class="container">
-        <div class="listing-single__top">
-            <div class="listing-single__top-left">
-                <h3 class="listing-single__title"><?= htmlspecialchars($kendaraan['nama_kendaraan']) ?></h3>
-                <p class="listing-single__sub-title"><?= htmlspecialchars($kendaraan['nama_tipe']) ?> - <?= htmlspecialchars($kendaraan['warna']) ?></p>
-                <div class="listing-single__car-details-box">
-                    <ul class="list-unstyled listing-single__car-details">
-                        <li>
-                            <span class="icon-date"></span>
-                            <p><?= $kendaraan['tahun'] ?></p>
-                        </li>
-                        <li>
-                            <span class="icon-manual"></span>
-                            <p><?= $kendaraan['is_manual'] ? 'Manual' : 'Otomatis' ?></p>
-                        </li>
-                        <li>
-                            <span class="icon-fuel-type"></span>
-                            <p><?= ucfirst($kendaraan['jenis_bahan_bakar']) ?></p>
-                        </li>
-                        <li>
-                            <span class="icon-seat"></span>
-                            <p><?= $kendaraan['kapasitas_penumpang'] ?> Kursi</p>
-                        </li>
-                    </ul>
-                </div>
+        <!-- Header Detail -->
+        <div class="row align-items-center mb-5">
+            <div class="col-lg-8">
+                <h1 class="display-5 fw-bold mb-2"><?= htmlspecialchars($kendaraan['nama_kendaraan']) ?></h1>
+                <p class="text-muted fs-5 mb-0"><?= htmlspecialchars($kendaraan['nama_tipe']) ?> &bull; <?= htmlspecialchars($kendaraan['warna']) ?></p>
             </div>
-            <div class="listing-single__top-right">
-                <div class="listing-single__tag">
-                    <a href="#">Bagi <span class="icon-arrow-up-from"></span> </a>
-                    <a href="#">Simpan <span class="icon-bookmark"></span> </a>
-                </div>
-                <h2 class="listing-single__price">Rp <?= number_format($kendaraan['harga_perhari'], 0, ',', '.') ?></h2>
-                <div class="listing-single__offer-price">
-                    <div class="icon">
-                        <span class="icon-tag-2"></span>
-                    </div>
-                    <div class="text">
-                        <p>Harga Sewa per Hari</p>
-                    </div>
-                </div>
+            <div class="col-lg-4 text-lg-end mt-4 mt-lg-0">
+                <h2 class="text-primary fw-bold mb-0">Rp <?= number_format($kendaraan['harga_perhari'], 0, ',', '.') ?></h2>
+                <p class="text-muted small">per hari</p>
             </div>
         </div>
-        <div class="listing-single__inner">
-            <div class="listing-single__main-content">
-                <div class="listing-single__main-content-inner">
-                    <div class="row">
-                        <div class="col-xl-12">
-                            <div class="listing-single__left">
-                                <div class="listing-single__img text-center">
-                                    <img src="<?= $kendaraan['foto_kendaraan'] ? '/uploads/' . $kendaraan['foto_kendaraan'] : 'assets/images/listing/listing-single-1-1.jpg' ?>" alt="<?= htmlspecialchars($kendaraan['nama_kendaraan']) ?>" class="rounded mw-100">
+
+        <div class="row">
+            <!-- Gambar Utama -->
+            <div class="col-lg-8">
+                <div class="card border-0 shadow-sm rounded-4 overflow-hidden mb-4">
+                    <img src="<?= $kendaraan['foto_kendaraan'] ? '/uploads/' . $kendaraan['foto_kendaraan'] : 'assets/images/listing/listing-single-1-1.jpg' ?>" 
+                         alt="<?= htmlspecialchars($kendaraan['nama_kendaraan']) ?>" 
+                         class="img-fluid w-100" style="max-height: 500px; object-fit: cover;">
+                </div>
+
+                <!-- Deskripsi & Info -->
+                <div class="card border-0 shadow-sm rounded-4 p-4 p-md-5">
+                    <h3 class="fw-bold mb-4">Tentang Mobil Ini</h3>
+                    <p class="text-secondary"><?= nl2br(htmlspecialchars($kendaraan['tipe_deskripsi'])) ?></p>
+                    
+                    <hr class="my-4">
+                    
+                    <h4 class="fw-bold mb-4">Spesifikasi</h4>
+                    <div class="row g-4">
+                        <?php 
+                        $specs = [
+                            ['Tahun', $kendaraan['tahun'], 'icon-date'],
+                            ['Transmisi', $kendaraan['is_manual'] ? 'Manual' : 'Otomatis', 'icon-manual'],
+                            ['Bahan Bakar', ucfirst($kendaraan['jenis_bahan_bakar']), 'icon-fuel-type'],
+                            ['Kapasitas', $kendaraan['kapasitas_penumpang'] . ' Kursi', 'icon-seat']
+                        ];
+                        foreach ($specs as $s): ?>
+                        <div class="col-6 col-md-3">
+                            <div class="d-flex align-items-center">
+                                <span class="<?= $s[2] ?> fs-4 me-3 text-primary"></span>
+                                <div>
+                                    <small class="d-block text-muted"><?= $s[0] ?></small>
+                                    <span class="fw-semibold"><?= $s[1] ?></span>
                                 </div>
                             </div>
                         </div>
+                        <?php endforeach; ?>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="listing-single__bottom">
-            <div class="row">
-                <div class="col-xl-8 col-lg-7">
-                    <div class="listing-single__bottom-left">
-                        <div class="listing-single__car-overview">
-                            <h3 class="listing-single__car-overview-title">Informasi Kendaraan</h3>
-                            <div class="listing-single__car-overview-points-box">
-                                <ul class="list-unstyled listing-single__car-overview-point">
-                                    <li>
-                                        <div class="listing-single__car-overview-point-left">
-                                            <i class="icon-car1"></i>
-                                            <p>Tipe</p>
-                                        </div>
-                                        <div class="listing-single__car-overview-point-right">
-                                            <p><?= htmlspecialchars($kendaraan['nama_tipe']) ?></p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="listing-single__car-overview-point-left">
-                                            <i class="icon-fuel-type"></i>
-                                            <p>Fuel Tipe</p>
-                                        </div>
-                                        <div class="listing-single__car-overview-point-right">
-                                            <p><?= ucfirst($kendaraan['jenis_bahan_bakar']) ?></p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="listing-single__car-overview-point-left">
-                                            <i class="icon-date"></i>
-                                            <p>Tahun</p>
-                                        </div>
-                                        <div class="listing-single__car-overview-point-right">
-                                            <p><?= $kendaraan['tahun'] ?></p>
-                                        </div>
-                                    </li>
-                                </ul>
-                                <ul class="list-unstyled listing-single__car-overview-point">
-                                    <li>
-                                        <div class="listing-single__car-overview-point-left">
-                                            <i class="icon-Carrier"></i>
-                                            <p>Transmisi</p>
-                                        </div>
-                                        <div class="listing-single__car-overview-point-right">
-                                            <p><?= $kendaraan['is_manual'] ? 'Manual' : 'Otomatis' ?></p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="listing-single__car-overview-point-left">
-                                            <i class="icon-color"></i>
-                                            <p>Warna</p>
-                                        </div>
-                                        <div class="listing-single__car-overview-point-right">
-                                            <p><?= htmlspecialchars($kendaraan['warna']) ?></p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="listing-single__car-overview-point-left">
-                                            <i class="icon-seat"></i>
-                                            <p>Kursi</p>
-                                        </div>
-                                        <div class="listing-single__car-overview-point-right">
-                                            <p><?= $kendaraan['kapasitas_penumpang'] ?></p>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="listing-single__description">
-                            <h3 class="listing-single__description-title">Deskripsi</h3>
-                            <p class="listing-single__description-text-1"><?= nl2br(htmlspecialchars($kendaraan['tipe_deskripsi'])) ?></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-4 col-lg-5">
-                    <div class="listing-single__sidebar">
-                        <div class="listing-single__rent-car-daily-price listing-single__single-box">
-                            <p>Tarif per Hari</p>
-                            <h3>Rp <?= number_format($kendaraan['harga_perhari'], 0, ',', '.') ?></h3>
-                        </div>
-                        <div class="listing-single__rent-car listing-single__single-box">
-                            <h3 class="listing-single__rent-car-title">Sewa Kendaraan Ini</h3>
-                            <div class="listing-single__rent-car-content">
-                                <p>Silakan login untuk melakukan pemesanan.</p>
-                            </div>
-                            <div class="listing-single__btn-box-2">
-                                <button type="button" onclick="addToCart(<?= htmlspecialchars(json_encode([
-                                    'id' => $kendaraan['id_kendaraan'],
-                                    'nama' => $kendaraan['nama_kendaraan'],
-                                    'harga' => $kendaraan['harga_perhari'],
-                                    'foto' => $kendaraan['foto_kendaraan'],
-                                    'id_tipe' => $kendaraan['id_tipe'],
-                                    'nama_tipe' => $kendaraan['nama_tipe']
-                                ])) ?>)" class="thm-btn w-100">Sewa Sekarang<span class="fas fa-arrow-right"></span></button>
-                            </div>
-                        </div>
-                    </div>
+
+            <!-- Sidebar -->
+            <div class="col-lg-4">
+                <div class="card border-0 shadow-sm rounded-4 p-4 sticky-top" style="top: 100px;">
+                    <h4 class="fw-bold mb-3">Sewa Sekarang</h4>
+                    <p class="text-muted small mb-4">Siap untuk perjalanan Anda berikutnya? Pastikan Anda sudah login untuk memesan.</p>
+                    
+                    <button type="button" 
+                            onclick="addToCart(<?= htmlspecialchars(json_encode([
+                                'id' => $kendaraan['id_kendaraan'],
+                                'nama' => $kendaraan['nama_kendaraan'],
+                                'harga' => $kendaraan['harga_perhari'],
+                                'foto' => $kendaraan['foto_kendaraan'],
+                                'id_tipe' => $kendaraan['id_tipe'],
+                                'nama_tipe' => $kendaraan['nama_tipe']
+                            ])) ?>)" 
+                            class="thm-btn w-100 py-3 rounded-pill d-flex align-items-center justify-content-center gap-2">
+                        <i class="fas fa-shopping-cart"></i> Tambah ke Keranjang
+                    </button>
                 </div>
             </div>
         </div>
     </div>
 </section>
-<!--Listing Single End-->
 
 <script>
 function addToCart(car) {
@@ -195,7 +111,7 @@ function addToCart(car) {
     // Check if car already in cart
     let existing = cart.find(item => item.id === car.id);
     if (existing) {
-        alert('Kendaraan ini sudah ada di dalam cart.');
+        alert('Kendaraan ini sudah ada di dalam keranjang.');
         window.location.href = 'cart.php';
         return;
     }
@@ -208,8 +124,9 @@ function addToCart(car) {
         updateHeaderCartCount();
     }
     
-    alert('Berhasil menambahkan ke cart!');
+    alert('Berhasil menambahkan ke keranjang!');
     window.location.href = 'cart.php';
 }
 </script>
+
 <?= layout('footer') ?>
