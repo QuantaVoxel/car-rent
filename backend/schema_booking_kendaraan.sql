@@ -72,7 +72,7 @@ CREATE TABLE kendaraan
     created_at     TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at     TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 
-    CONSTRAINT fk_kendaraan_tipe FOREIGN KEY (id_tipe) REFERENCES tipe_kendaraan (id_tipe)
+    CONSTRAINT fk_kendaraan_tipe FOREIGN KEY (id_tipe) REFERENCES tipe_kendaraan (id_tipe) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ------------------------------------------------------------
@@ -124,9 +124,9 @@ CREATE TABLE pesanan
     created_at        TIMESTAMP      NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at        TIMESTAMP      NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 
-    CONSTRAINT fk_pesanan_pengguna FOREIGN KEY (id_pengguna) REFERENCES pengguna (id_pengguna),
-    CONSTRAINT fk_pesanan_tipe FOREIGN KEY (id_tipe_kendaraan) REFERENCES tipe_kendaraan (id_tipe),
-    CONSTRAINT fk_pesanan_kendaraan FOREIGN KEY (id_kendaraan) REFERENCES kendaraan (id_kendaraan)
+    CONSTRAINT fk_pesanan_pengguna FOREIGN KEY (id_pengguna) REFERENCES pengguna (id_pengguna) ON DELETE CASCADE,
+    CONSTRAINT fk_pesanan_tipe FOREIGN KEY (id_tipe_kendaraan) REFERENCES tipe_kendaraan (id_tipe) ON DELETE CASCADE,
+    CONSTRAINT fk_pesanan_kendaraan FOREIGN KEY (id_kendaraan) REFERENCES kendaraan (id_kendaraan) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ------------------------------------------------------------
@@ -155,7 +155,7 @@ CREATE TABLE pembayaran
     created_at        TIMESTAMP      NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at        TIMESTAMP      NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 
-    CONSTRAINT fk_pembayaran_pesanan FOREIGN KEY (id_pesanan) REFERENCES pesanan (id_pesanan)
+    CONSTRAINT fk_pembayaran_pesanan FOREIGN KEY (id_pesanan) REFERENCES pesanan (id_pesanan) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ------------------------------------------------------------
@@ -171,8 +171,8 @@ CREATE TABLE evaluasi_pesanan
     komentar    TEXT NULL,
     created_at  TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
-    CONSTRAINT fk_evaluasi_pesanan FOREIGN KEY (id_pesanan) REFERENCES pesanan (id_pesanan),
-    CONSTRAINT fk_evaluasi_pengguna FOREIGN KEY (id_pengguna) REFERENCES pengguna (id_pengguna)
+    CONSTRAINT fk_evaluasi_pesanan FOREIGN KEY (id_pesanan) REFERENCES pesanan (id_pesanan) ON DELETE CASCADE,
+    CONSTRAINT fk_evaluasi_pengguna FOREIGN KEY (id_pengguna) REFERENCES pengguna (id_pengguna) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ------------------------------------------------------------
