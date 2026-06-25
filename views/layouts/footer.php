@@ -14,7 +14,7 @@
                                 <a href="/"><img src="assets/images/resources/logo-1.png"
                                                           alt="GoRent Logo"></a>
                             </div>
-                            <p class="footer-widget__about-text">GoRent adalah mitra terpercaya Anda untuk solusi transportasi berkualitas. Kami menghadirkan armada terbaik dengan pelayanan profesional untuk kenyamanan perjalanan Anda.</p>
+                            <p class="footer-widget__about-text">GoRent adalah mitra terpercaya Anda untuk solusi transportasi berkualitas. Kami menghadirkan Kendaraan terbaik dengan pelayanan profesional untuk kenyamanan perjalanan Anda.</p>
                             <form class="footer-widget__form">
                                 <div class="footer-widget__input">
                                     <input type="email" placeholder="Email Anda">
@@ -29,7 +29,7 @@
                             <h4 class="footer-widget__title">Tautan Cepat</h4>
                             <ul class="footer-widget__links-list list-unstyled">
                                 <li><a href="index.php">Beranda</a></li>
-                                <li><a href="kendaraan.php">Armada Kami</a></li>
+                                <li><a href="kendaraan.php">Kendaraan Kami</a></li>
                                 <li><a href="cart.php">Keranjang</a></li>
                                 <li><a href="login.php">Login</a></li>
                             </ul>
@@ -142,7 +142,7 @@
 
 <a href="#" data-target="html" class="scroll-to-target scroll-to-top">
     <span class="scroll-to-top__wrapper"><span class="scroll-to-top__inner"></span></span>
-    <span class="scroll-to-top__text"> Go Back Top</span>
+    <span class="scroll-to-top__text"> Kembali ke Atas</span>
 </a>
 
 

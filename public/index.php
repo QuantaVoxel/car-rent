@@ -30,7 +30,7 @@ $popular_cars = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <p class="banner-one__sub-title">Platform Sewa Mobil Terpercaya & Profesional</p>
                     <h2 class="banner-one__title">Solusi Transportasi Terbaik <br> <span> Untuk</span> <span class="typed-effect" id="type-1" data-strings="Perjalanan, Bisnis, Liburan"></span>
                     </h2>
-                    <p class="banner-one__text">Nikmati kemudahan menyewa kendaraan dengan layanan prima dan armada terbaru. <br> Kami menyediakan berbagai pilihan kendaraan untuk mendukung mobilitas Anda <br> dengan proses yang cepat, aman, dan harga yang kompetitif.</p>
+                    <p class="banner-one__text">Nikmati kemudahan menyewa kendaraan dengan layanan prima dan Kendaraan terbaru. <br> Kami menyediakan berbagai pilihan kendaraan untuk mendukung mobilitas Anda <br> dengan proses yang cepat, aman, dan harga yang kompetitif.</p>
                     <div class="banner-one__btn-box">
                         <a href="kendaraan.php" class="thm-btn">Cari Kendaraan<span class="fas fa-arrow-right"></span></a>
                     </div>
@@ -70,7 +70,7 @@ $popular_cars = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             </div>
                             <div class="process-one__count"></div>
                         </div>
-                        <h3 class="process-one__title">Pilih Armada</h3>
+                        <h3 class="process-one__title">Pilih Kendaraan</h3>
                         <p class="process-one__text">Pilih kendaraan yang sesuai dengan kebutuhan perjalanan Anda dari katalog kami.</p>
                     </div>
                 </div>
@@ -147,7 +147,7 @@ $popular_cars = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     </div>
                     <span class="section-title__tagline">Katalog Utama</span>
                 </div>
-                <h2 class="section-title__title title-animation">Pilihan Armada Terpopuler</h2>
+                <h2 class="section-title__title title-animation">Pilihan Kendaraan Terpopuler</h2>
             </div>
             <div class="listing-three__carousel owl-carousel owl-theme">
                 <?php foreach ($popular_cars as $kendaraan): ?>
@@ -265,7 +265,7 @@ $popular_cars = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                  style="background-image: url(assets/images/backgrounds/feature-one-bg-1.jpg);">
                             </div>
                             <h3 class="feature-one__inner-title">Butuh Kendaraan <br>Untuk Perjalanan Anda?</h3>
-                            <p class="feature-one__inner-text">Temukan armada terbaik yang sesuai dengan gaya dan kebutuhan anggaran Anda hanya dalam beberapa klik.</p>
+                            <p class="feature-one__inner-text">Temukan Kendaraan terbaik yang sesuai dengan gaya dan kebutuhan anggaran Anda hanya dalam beberapa klik.</p>
                             <div class="feature-one__inner-btn-box">
                                 <a href="kendaraan.php" class="thm-btn">Lihat Semua</a>
                             </div>

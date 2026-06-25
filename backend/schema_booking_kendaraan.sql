@@ -53,7 +53,7 @@ CREATE TABLE tipe_kendaraan
 
 -- ------------------------------------------------------------
 -- 4. TABEL KENDARAAN
---    Armada kendaraan yang dikelola admin
+--    Kendaraan kendaraan yang dikelola admin
 -- ------------------------------------------------------------
 CREATE TABLE kendaraan
 (

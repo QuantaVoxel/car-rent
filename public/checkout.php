@@ -103,7 +103,7 @@ function renderCheckout() {
     const input = document.getElementById('cart-data-input');
     
     if (cart.length === 0) {
-        alert('Cart Anda kosong.');
+        alert('Keranjang Anda kosong.');
         window.location.href = 'kendaraan.php';
         return;
     }

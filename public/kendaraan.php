@@ -37,7 +37,7 @@ $kendaraans = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                         <span class="icon-manual"></span>
                                     </div>
                                     <div class="text">
-                                        <p><?= $kendaraan['is_manual'] ? 'Manual' : 'Automatic' ?></p>
+                                        <p><?= $kendaraan['is_manual'] ? 'Manual' : 'Otomatis' ?></p>
                                     </div>
                                 </li>
                                 <li>
@@ -71,7 +71,7 @@ $kendaraans = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                         <span class="icon-in-person"></span>
                                     </div>
                                     <div class="text">
-                                        <p><?= $kendaraan['kapasitas_penumpang'] ?> Persons</p>
+                                        <p><?= $kendaraan['kapasitas_penumpang'] ?> Orang</p>
                                     </div>
                                 </li>
                                 <li>
@@ -85,11 +85,11 @@ $kendaraans = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             </ul>
                         </div>
                         <div class="listing-one__car-rent-box">
-                            <p class="listing-one__car-rent">Mulai Dari
+                            <p class="listing-one__car-rent">Mulai dari
                                 <span>Rp <?= number_format($kendaraan['harga_perhari'], 0, ',', '.') ?>/</span> Hari</p>
                         </div>
                         <div class="listing-one__btn-box">
-                            <a href="kendaraan-detail.php?id=<?= $kendaraan['id_kendaraan'] ?>" class="thm-btn">Details Now<span
+                            <a href="kendaraan-detail.php?id=<?= $kendaraan['id_kendaraan'] ?>" class="thm-btn">Lihat Detail<span
                                     class="fas fa-arrow-right"></span></a>
                         </div>
                     </div>

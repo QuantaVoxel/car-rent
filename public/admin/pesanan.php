@@ -23,7 +23,7 @@ $kendaraans = Kendaraan::all();
                         </h1>
                         <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
                             <li class="breadcrumb-item text-muted">
-                                <a href="/admin/index.php" class="text-muted text-hover-primary">Home</a>
+                                <a href="/admin/index.php" class="text-muted text-hover-primary">Beranda</a>
                             </li>
                             <li class="breadcrumb-item">
                                 <span class="bullet bg-gray-500 w-5px h-2px"></span>
@@ -113,7 +113,7 @@ $kendaraans = Kendaraan::all();
                                                 class="path1"></span><span class="path2"></span></i>
                                     <input type="text" data-kt-filter="search"
                                            class="form-control form-control-solid w-250px ps-12"
-                                           placeholder="Cari Pesanan..."/>
+                                           placeholder="Cari..."/>
                                 </div>
                             </div>
                         </div>
@@ -246,7 +246,7 @@ $kendaraans = Kendaraan::all();
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer flex-center">
-                                                        <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">Discard</button>
+                                                        <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">Batalkan</button>
                                                         <button type="submit" class="btn btn-primary">
                                                             <span class="indicator-label">Update Status</span>
                                                         </button>
@@ -357,9 +357,9 @@ $kendaraans = Kendaraan::all();
                         </div>
                     </div>
                     <div class="modal-footer flex-center">
-                        <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">Discard</button>
+                        <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">Batalkan</button>
                         <button type="submit" class="btn btn-primary">
-                            <span class="indicator-label">Create Order</span>
+                            <span class="indicator-label">Pesan</span>
                         </button>
                     </div>
                 </form>

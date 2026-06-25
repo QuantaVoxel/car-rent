@@ -3,33 +3,30 @@ require_once __DIR__ . '/../backend/bootstrap.php';
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="id">
 
 <!-- Mirrored from dreamlayout.mnsithub.com/html/gorent/main-html/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 23 May 2026 03:20:20 GMT -->
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title> Go Rent - Registrasi </title>
+    <title>Go Rent - Daftar</title>
     <!-- favicons Icons -->
     <link rel="apple-touch-icon" sizes="180x180" href="assets/images/favicons/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicons/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicons/favicon-16x16.png" />
     <link rel="manifest" href="assets/images/favicons/site.webmanifest" />
-    <meta name="description" content="Gorent HTML 5 Template " />
+    <meta name="description" content="Go Rent - Sewa Mobil Terbaik" />
 
     <!-- fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com/">
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&amp;display=swap"
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
         rel="stylesheet">
-
 
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&amp;family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&amp;display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
         rel="stylesheet">
-
 
     <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
     <link rel="stylesheet" href="assets/css/animate.min.css" />
@@ -46,7 +43,6 @@ require_once __DIR__ . '/../backend/bootstrap.php';
     <link rel="stylesheet" href="assets/css/aos.css" />
     <link rel="stylesheet" href="assets/css/odometer.min.css" />
     <link rel="stylesheet" href="assets/css/timePicker.css" />
-
 
     <link rel="stylesheet" href="assets/css/module-css/slider.css" />
     <link rel="stylesheet" href="assets/css/module-css/footer.css" />
@@ -92,14 +88,13 @@ require_once __DIR__ . '/../backend/bootstrap.php';
 </div>
 <!--End Preloader-->
 
-
 <div class="page-wrapper">
     <!--Start Login One-->
     <section class="login-one">
         <div class="container">
             <div class="login-one__form">
                 <div class="inner-title text-center">
-                    <h2>Registrasi Akun</h2>
+                    <h2>Daftar Akun</h2>
                 </div>
 
                 <?php if (has_flash('error')): ?>
@@ -138,19 +133,19 @@ require_once __DIR__ . '/../backend/bootstrap.php';
                             <div class="form-group">
                                 <div class="input-box">
                                     <input type="password" name="password" id="formPassword"
-                                           placeholder="Password..." required="" value="">
+                                           placeholder="Kata Sandi..." required="" value="">
                                 </div>
                             </div>
                         </div>
                         <div class="col-xl-12">
                             <div class="form-group">
-                                <button class="thm-btn" type="submit" data-loading-text="Please wait...">Registrasi Sekarang
+                                <button class="thm-btn" type="submit" data-loading-text="Mohon tunggu...">Daftar Sekarang
                                     <span class="fas fa-arrow-right"></span>
                                 </button>
                             </div>
                         </div>
                         <div class="create-account text-center">
-                            <p>sudah punya akun? <a href="login.php">login</a></p>
+                            <p>Sudah punya akun? <a href="login.php">Masuk</a></p>
                         </div>
                     </div>
                 </form>
@@ -159,7 +154,6 @@ require_once __DIR__ . '/../backend/bootstrap.php';
     </section>
     <!--End Login One-->
 </div><!-- /.page-wrapper -->
-
 
 <script src="assets/js/jquery-3.6.0.min.js"></script>
 <script src="assets/js/bootstrap.bundle.min.js"></script>
@@ -186,12 +180,8 @@ require_once __DIR__ . '/../backend/bootstrap.php';
 <script src="assets/js/typed-2.0.11.js"></script>
 <script src="assets/js/aos.js"></script>
 
-
-
-
 <!-- template js -->
 <script src="assets/js/script.js"></script>
 </body>
-
 
 </html>

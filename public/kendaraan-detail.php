@@ -41,7 +41,7 @@ if (!$kendaraan) {
                         </li>
                         <li>
                             <span class="icon-manual"></span>
-                            <p><?= $kendaraan['is_manual'] ? 'Manual' : 'Automatic' ?></p>
+                            <p><?= $kendaraan['is_manual'] ? 'Manual' : 'Otomatis' ?></p>
                         </li>
                         <li>
                             <span class="icon-fuel-type"></span>
@@ -49,15 +49,15 @@ if (!$kendaraan) {
                         </li>
                         <li>
                             <span class="icon-seat"></span>
-                            <p><?= $kendaraan['kapasitas_penumpang'] ?> Seats</p>
+                            <p><?= $kendaraan['kapasitas_penumpang'] ?> Kursi</p>
                         </li>
                     </ul>
                 </div>
             </div>
             <div class="listing-single__top-right">
                 <div class="listing-single__tag">
-                    <a href="#">Share <span class="icon-arrow-up-from"></span> </a>
-                    <a href="#">Save <span class="icon-bookmark"></span> </a>
+                    <a href="#">Bagi <span class="icon-arrow-up-from"></span> </a>
+                    <a href="#">Simpan <span class="icon-bookmark"></span> </a>
                 </div>
                 <h2 class="listing-single__price">Rp <?= number_format($kendaraan['harga_perhari'], 0, ',', '.') ?></h2>
                 <div class="listing-single__offer-price">
@@ -65,7 +65,7 @@ if (!$kendaraan) {
                         <span class="icon-tag-2"></span>
                     </div>
                     <div class="text">
-                        <p>Harga Sewa Per Hari</p>
+                        <p>Harga Sewa per Hari</p>
                     </div>
                 </div>
             </div>
@@ -90,13 +90,13 @@ if (!$kendaraan) {
                 <div class="col-xl-8 col-lg-7">
                     <div class="listing-single__bottom-left">
                         <div class="listing-single__car-overview">
-                            <h3 class="listing-single__car-overview-title">Vehicle Overview</h3>
+                            <h3 class="listing-single__car-overview-title">Informasi Kendaraan</h3>
                             <div class="listing-single__car-overview-points-box">
                                 <ul class="list-unstyled listing-single__car-overview-point">
                                     <li>
                                         <div class="listing-single__car-overview-point-left">
                                             <i class="icon-car1"></i>
-                                            <p>Type</p>
+                                            <p>Tipe</p>
                                         </div>
                                         <div class="listing-single__car-overview-point-right">
                                             <p><?= htmlspecialchars($kendaraan['nama_tipe']) ?></p>
@@ -105,7 +105,7 @@ if (!$kendaraan) {
                                     <li>
                                         <div class="listing-single__car-overview-point-left">
                                             <i class="icon-fuel-type"></i>
-                                            <p>Fuel Type</p>
+                                            <p>Fuel Tipe</p>
                                         </div>
                                         <div class="listing-single__car-overview-point-right">
                                             <p><?= ucfirst($kendaraan['jenis_bahan_bakar']) ?></p>
@@ -114,7 +114,7 @@ if (!$kendaraan) {
                                     <li>
                                         <div class="listing-single__car-overview-point-left">
                                             <i class="icon-date"></i>
-                                            <p>Year</p>
+                                            <p>Tahun</p>
                                         </div>
                                         <div class="listing-single__car-overview-point-right">
                                             <p><?= $kendaraan['tahun'] ?></p>
@@ -125,16 +125,16 @@ if (!$kendaraan) {
                                     <li>
                                         <div class="listing-single__car-overview-point-left">
                                             <i class="icon-Carrier"></i>
-                                            <p>Transmission</p>
+                                            <p>Transmisi</p>
                                         </div>
                                         <div class="listing-single__car-overview-point-right">
-                                            <p><?= $kendaraan['is_manual'] ? 'Manual' : 'Automatic' ?></p>
+                                            <p><?= $kendaraan['is_manual'] ? 'Manual' : 'Otomatis' ?></p>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="listing-single__car-overview-point-left">
                                             <i class="icon-color"></i>
-                                            <p>Color</p>
+                                            <p>Warna</p>
                                         </div>
                                         <div class="listing-single__car-overview-point-right">
                                             <p><?= htmlspecialchars($kendaraan['warna']) ?></p>
@@ -143,7 +143,7 @@ if (!$kendaraan) {
                                     <li>
                                         <div class="listing-single__car-overview-point-left">
                                             <i class="icon-seat"></i>
-                                            <p>Seats</p>
+                                            <p>Kursi</p>
                                         </div>
                                         <div class="listing-single__car-overview-point-right">
                                             <p><?= $kendaraan['kapasitas_penumpang'] ?></p>
@@ -153,7 +153,7 @@ if (!$kendaraan) {
                             </div>
                         </div>
                         <div class="listing-single__description">
-                            <h3 class="listing-single__description-title">Description</h3>
+                            <h3 class="listing-single__description-title">Deskripsi</h3>
                             <p class="listing-single__description-text-1"><?= nl2br(htmlspecialchars($kendaraan['tipe_deskripsi'])) ?></p>
                         </div>
                     </div>
@@ -161,13 +161,13 @@ if (!$kendaraan) {
                 <div class="col-xl-4 col-lg-5">
                     <div class="listing-single__sidebar">
                         <div class="listing-single__rent-car-daily-price listing-single__single-box">
-                            <p>Tarif Per Hari</p>
+                            <p>Tarif per Hari</p>
                             <h3>Rp <?= number_format($kendaraan['harga_perhari'], 0, ',', '.') ?></h3>
                         </div>
                         <div class="listing-single__rent-car listing-single__single-box">
                             <h3 class="listing-single__rent-car-title">Sewa Kendaraan Ini</h3>
                             <div class="listing-single__rent-car-content">
-                                <p>Silakan hubungi admin atau login untuk melakukan pemesanan kendaraan.</p>
+                                <p>Silakan login untuk melakukan pemesanan.</p>
                             </div>
                             <div class="listing-single__btn-box-2">
                                 <button type="button" onclick="addToCart(<?= htmlspecialchars(json_encode([
@@ -177,7 +177,7 @@ if (!$kendaraan) {
                                     'foto' => $kendaraan['foto_kendaraan'],
                                     'id_tipe' => $kendaraan['id_tipe'],
                                     'nama_tipe' => $kendaraan['nama_tipe']
-                                ])) ?>)" class="thm-btn w-100">Booking Sekarang<span class="fas fa-arrow-right"></span></button>
+                                ])) ?>)" class="thm-btn w-100">Sewa Sekarang<span class="fas fa-arrow-right"></span></button>
                             </div>
                         </div>
                     </div>

@@ -1,20 +1,20 @@
 <ul class="main-menu__list">
     <li>
-        <a href="/">Home </a>
+        <a href="/">Beranda</a>
     </li>
     <li>
-        <a href="/kendaraan.php">Kendaraan </a>
+        <a href="/kendaraan.php">Kendaraan</a>
     </li>
     <?php if (auth()->check()) : ?>
         <li>
-            <a class="text-danger" href="/logout.php">Logout </a>
+            <a class="text-danger" href="/logout.php">Keluar</a>
         </li>
     <?php else : ?>
         <li>
-            <a href="/registrasi.php">Registrasi </a>
+            <a href="/registrasi.php">Registrasi</a>
         </li>
         <li>
-            <a href="/login.php">Login </a>
+            <a href="/login.php">Masuk</a>
         </li>
     <?php endif; ?>
 </ul>

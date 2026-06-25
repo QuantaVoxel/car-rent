@@ -3,13 +3,13 @@ $auth = auth()->user()->toArray();
 ?>
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="id">
 <meta http-equiv="content-type" content="text/html;charset=UTF-8"/><!-- /Added by HTTrack -->
 <head>
-    <title>GoRent Admin - Booking Kendaraan Online</title>
+    <title>GoRent Admin - Manajemen Booking Kendaraan</title>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta property="og:locale" content="en_US"/>
+    <meta property="og:locale" content="id_ID"/>
 
     <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicons/apple-touch-icon.png"/>
     <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicons/favicon-32x32.png"/>

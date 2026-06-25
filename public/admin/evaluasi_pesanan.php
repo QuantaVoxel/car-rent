@@ -17,7 +17,7 @@ $items = EvaluasiPesanan::all(['pesanan', 'pengguna']);
                         </h1>
                         <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
                             <li class="breadcrumb-item text-muted">
-                                <a href="/admin/index.php" class="text-muted text-hover-primary">Home</a>
+                                <a href="/admin/index.php" class="text-muted text-hover-primary">Beranda</a>
                             </li>
                             <li class="breadcrumb-item">
                                 <span class="bullet bg-gray-500 w-5px h-2px"></span>
@@ -70,7 +70,7 @@ $items = EvaluasiPesanan::all(['pesanan', 'pengguna']);
                                                 class="path1"></span><span class="path2"></span></i>
                                     <input type="text" data-kt-filter="search"
                                            class="form-control form-control-solid w-250px ps-12"
-                                           placeholder="Cari Evaluasi..."/>
+                                           placeholder="Cari..."/>
                                 </div>
                             </div>
                         </div>

@@ -29,7 +29,7 @@ $recent_orders = $db->query("
                         </h1>
                         <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
                             <li class="breadcrumb-item text-muted">
-                                <a href="/admin/index.php" class="text-muted text-hover-primary">Home</a>
+                                <a href="/admin/index.php" class="text-muted text-hover-primary">Beranda</a>
                             </li>
                             <li class="breadcrumb-item">
                                 <span class="bullet bg-gray-500 w-5px h-2px"></span>
@@ -72,7 +72,7 @@ $recent_orders = $db->query("
                                 </div>
                                 <div class="card-body d-flex align-items-end pt-0">
                                     <div class="d-flex align-items-center flex-column mt-3 w-100">
-                                        <a href="/admin/kendaraan.php" class="btn btn-sm btn-light-success w-100">Kelola Armada</a>
+                                        <a href="/admin/kendaraan.php" class="btn btn-sm btn-light-success w-100">Kelola Kendaraan</a>
                                     </div>
                                 </div>
                             </div>
@@ -104,7 +104,7 @@ $recent_orders = $db->query("
                                 </div>
                                 <div class="card-body d-flex align-items-end pt-0">
                                     <div class="d-flex align-items-center flex-column mt-3 w-100">
-                                        <a href="/admin/pembayaran.php" class="btn btn-sm btn-light-warning w-100">Riwayat Bayar</a>
+                                        <a href="/admin/pembayaran.php" class="btn btn-sm btn-light-warning w-100">Riwayat Pembayaran</a>
                                     </div>
                                 </div>
                             </div>
@@ -115,7 +115,7 @@ $recent_orders = $db->query("
                                 <div class="card-header pt-7">
                                     <h3 class="card-title align-items-start flex-column">
                                         <span class="card-label fw-bold text-gray-900">Pesanan Terbaru</span>
-                                        <span class="text-gray-500 mt-1 fw-semibold fs-6">5 Transaksi terakhir</span>
+                                        <span class="text-gray-500 mt-1 fw-semibold fs-6">5 Transaksi Terakhir</span>
                                     </h3>
                                 </div>
                                 <div class="card-body pt-6">

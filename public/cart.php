@@ -14,9 +14,9 @@ require_once __DIR__ . '/../backend/bootstrap.php';
                         <table class="table cart-table">
                             <thead>
                             <tr>
-                                <th>Item</th>
-                                <th>Price</th>
-                                <th>Actions</th>
+                                <th>Kendaraan</th>
+                                <th>Harga</th>
+                                <th>Aksi</th>
                             </tr>
                             </thead>
                             <tbody id="cart-items-body">
