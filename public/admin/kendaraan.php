@@ -148,7 +148,8 @@ $tipes = TipeKendaraan::all();
                                                         <img src="/uploads/<?= $item['foto_kendaraan'] ?>" alt="Foto" />
                                                     <?php else: ?>
                                                         <div class="symbol-label fs-3 bg-light-primary text-primary">
-                                                            <?= substr($item['nama_kendaraan'], 0, 1) ?></div>
+                                                            <?= substr($item['nama_kendaraan'], 0, 1) ?>
+                                                        </div>
                                                     <?php endif; ?>
                                                 </div>
                                                 <div class="ms-0">
@@ -173,7 +174,8 @@ $tipes = TipeKendaraan::all();
                                             ][$item['status']] ?? 'secondary';
                                             ?>
                                             <div class="badge badge-light-<?= $status_class ?>">
-                                                <?= ucfirst($item['status']) ?></div>
+                                                <?= ucfirst($item['status']) ?>
+                                            </div>
                                         </td>
                                         <td class="text-end">
                                             <a href="#"
